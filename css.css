@@ -1,0 +1,16 @@
+body {
+    display: grid;
+    margin: 20px;
+}
+
+.title > h1 {
+    display: inline-block;
+}
+.infoBtn {
+    width: 50px;
+    left: 0;
+}
+
+.btns {
+    margin: 20px;
+}
