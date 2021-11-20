@@ -17,10 +17,16 @@ max turns = 50 (sudden death)
 
 Tasks:
 
+- shuffle deck button
+- win game logic 
+- rules message
+- settings 
+    - different backgrounds
+    - Able to change background color theme
+    - Able to set number of rounds before a winner is declared (30, 50, unlimited)
 - change background when its time for "War"
-- Click 4 times "play card" for War
+    - add sound effect for war
 
-- hand array - display only last card in array
 
 */
 
@@ -78,15 +84,17 @@ let round, winner, pPile, cPile, pHand, cHand, pDeck, cDeck, warStatus, warCards
 
 
 //////////////////////////////    Cached element references    ////////////////////////////
+// Field
 let pHandEl = document.querySelector(".pHand");
 let cHandEl = document.querySelector(".cHand");
 let pPileEl = document.querySelector(".pPile");
 let cPileEl = document.querySelector(".cPile");
+// Buttons
 let pCardBtnEl = document.querySelector(".pCardBtn");
+// Messages
 let roundEl = document.querySelector(".round");
-
-
-// rules
+let warMsgEl = document.querySelector(".warMsg");
+let shuffleBtnEl = document.querySelector(".shuffleBtn");
 
 
 
@@ -136,6 +144,7 @@ function render() {
     } else {
         cPileEl.style.display = "none";
         pPileEl.style.display = "none";
+        warMsgEl.style.display = "none";
     }
 };
 
@@ -165,7 +174,7 @@ function getWinner() {
     if (pHand[0].value > cHand[0].value) {
         // Add cards from both hands to player's deck (LiFo)
         while (pHand.length) {
-            pDeck.unshift(pHand.shift(),cHand.shift());
+            pDeck.unshift(pHand.shift(), cHand.shift());
         }
         // both pile to player's deck
         while (pPile.length) {
@@ -177,7 +186,7 @@ function getWinner() {
     else if (cHand[0].value > pHand[0].value) {
         // Add both hands to computer's deck (LiFo)
         while (cHand.length) {
-            cDeck.unshift(cHand.shift(),pHand.shift());
+            cDeck.unshift(cHand.shift(), pHand.shift());
         }
         // add both pile to computer's deck
         while (cPile.length > 0) {
@@ -192,19 +201,9 @@ function getWinner() {
         // Change background
 
         // Sound
-        
-        // display War time message: Play 4 more cards
 
-        
-        
-        // for (let i = 0 ; i < 3; i++) {
-        //     cPile.push(cDeck.pop());
-        //     pPile.push(pDeck.pop());
-        // }
-        // // 1 card from end of deck to front of hand
-        // pHand.unshift(pDeck.pop());
-        // cHand.unshift(cDeck.pop());
-        // getWinner();
+        // display War time message: Play 4 more cards
+        warMsgEl.style.display = "inline-block";
     }
 
 
@@ -212,14 +211,17 @@ function getWinner() {
     // If player’s deck or computer’s deck is empty, display winner
     if (!pDeck.length) {
         // computer wins!
+        console.log("computer wins")
     }
     else if (!cDeck.length) {
         // player wins!
+        console.log("player wins")
     }
-    else if (round > 50) {
+    else if (round === 50) {
         // winner of next round wins the game!
+        console.log("SUDDEN DEATH")
     }
-    
+
     // Else if round is greater than 50
     // If player’s deck count is greater than computer’s deck count
     // Player wins
@@ -230,24 +232,20 @@ function getWinner() {
 
 };
 
-function warTime () {
+function warTime() {
     warCards++;
-    console.log(warCards);
     // if first 3 cards of war
     if (warCards < 4) {
         // add card from player deck to player pile
         pPile.push(pDeck.pop());
         // add card from computer deck to computer pile
         cPile.push(cDeck.pop());
-        console.log(cPile,pPile)
     }
     else if (warCards === 4) {
         // add card from player deck to player hand
         pHand.unshift(pDeck.pop());
-        console.log(pHand);
         // add card from computer deck to computer hand
         cHand.unshift(cDeck.pop());
-        console.log(cHand);
         // turn off war status
         warStatus = false;
         // reset warCards
@@ -257,6 +255,22 @@ function warTime () {
     getWinner();
 }
 
+function shufflePDeck() {
+    // Create temporary deck
+    let tempDeck = [];
+    // while pDeck.length is true
+    while (pDeck.length) {
+        // generate random number between 0 and pDeck.length
+        let randomNum = Math.floor(Math.random() * pDeck.length);
+        // add random index number card from pDeck to temp deck
+        tempDeck.push(pDeck.splice(randomNum, 1)[0]);
+    };
+    // copy new shuffled deck back to player deck
+    pDeck = tempDeck.map(function(card) {
+        return card;
+    });
+    return pDeck;
+}
 
 //////////////////////////////    Event Listeners    ////////////////////////////
 
@@ -271,13 +285,12 @@ pCardBtnEl.addEventListener("click", function (e) {
 
 
 // Shuffle deck button
-
+shuffleBtnEl.addEventListener("click", shufflePDeck);
 
 // Player has the option to shuffle their deck only once per turn
 
 // Settings button
-// Able to change background color theme
-// Able to set number of rounds before a winner is declared (30, 50, unlimited)
+
 
 //Play again button
 // pops up after game is over
