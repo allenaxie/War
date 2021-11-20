@@ -28,8 +28,6 @@ Tasks:
 
 //////////////////////////////    Constants    ////////////////////////////
 
-// Cards will be ranked by index number
-
 // Constants
 const suits = ['s', 'c', 'd', 'h'];
 const ranks = ['02', '03', '04', '05', '06', '07', '08', '09', '10', 'J', 'Q', 'K', 'A'];
@@ -58,6 +56,7 @@ function buildMasterDeck() {
     return deck;
 }
 
+
 function getNewShuffledDeck() {
     // Create a copy of the masterDeck (leave masterDeck untouched!)
     const tempDeck = [...masterDeck];
@@ -74,13 +73,18 @@ function getNewShuffledDeck() {
 
 //////////////////////////////    App's state (variables)    ////////////////////////////
 
-let round, winner, pHand, cHand, pDeck, cDeck;
+let round, winner, pPile, cPile, pHand, cHand, pDeck, cDeck;
 
 
 //////////////////////////////    Cached element references    ////////////////////////////
-let pHandEl = document.querySelector(".pHand")
-let cHandEl = document.querySelector(".cHand")
-let pCardBtnEl = document.querySelector(".pCardBtn")
+let pHandEl = document.querySelector(".pHand");
+let cHandEl = document.querySelector(".cHand");
+let pPileEl = document.querySelector(".pPile");
+let cPileEl = document.querySelector(".cPile");
+
+let pCardBtnEl = document.querySelector(".pCardBtn");
+
+let roundEl = document.querySelector(".round");
 
 
 // rules
@@ -89,46 +93,123 @@ let pCardBtnEl = document.querySelector(".pCardBtn")
 
 //////////////////////////////    Functions    ////////////////////////////
 
+init();
+
 // Set initial variables
 function init() {
+    // new shuffled deck
     shuffledDeck = getNewShuffledDeck();
-    pHand = [shuffledDeck.pop()];
-    cHand = [shuffledDeck.pop()];
-    for (let i =0; i< shuffledDeck.length; i++) {
-        pDeck = [shuffledDeck.pop()];
-        cDeck = [shuffledDeck.pop()];
+    // Assign values to decks
+    pDeck = [];
+    cDeck = [];
+    // Assign value to player pile and computer pile 
+    pPile = [];
+    cPile = [];
+    // Add rest of cards to respective players' decks
+    while (shuffledDeck.length) {
+        cDeck.push(shuffledDeck.pop());
+        pDeck.push(shuffledDeck.pop());
     }
+    // 1 card to player hand
+    pHand = [pDeck.pop()];
+    // 1 card to computer hand
+    cHand = [cDeck.pop()];
     round = 1;
+    winner = null;
     render();
 }
-init();
+
 
 
 function render() {
-    // Display card on HTML 
+    // Display first card of player's hand 
     let cardTemplate = `<div class="card ${pHand[0].face}"></div>`;
     pHandEl.innerHTML = cardTemplate;
+    // display first card of computer's hand
     let cardTemplate2 = `<div class="card ${cHand[0].face}"></div>`;
     cHandEl.innerHTML = cardTemplate2;
+    // Update round number onto DOM
+    roundEl.innerHTML = `Round: ${round}`;
+    if (cPile.length) {
+        cPileEl.style.display = "inline-block";
+        pPileEl.style.display = "inline-block";
+    }
 }
 
 
 function handleMove() {
-    // Plays the next card on top of the player’s deck and computer’s deck
-    pHand = [shuffledDeck.pop()];
-    cHand = [shuffledDeck.pop()];
-    render();
-    getWinner();
+    // if first turn, show card 
+    if (round === 1) {
+        pHandEl.style.display = "block";
+        cHandEl.style.display = "block";
+    }
+    else {
+        // Play the next card from the player’s deck and computer’s deck
+        pHand.unshift(pDeck.pop());
+        cHand.unshift(cDeck.pop());
+    }
+    // Increment round number
     round++;
+    // show card on DOM
+    render();
+    // Check for winner
+    getWinner();
 }
 
 
 function getWinner() {
-    // If player’s card is of higher value than computer’s card
+    // Check for winner of each round
+    // If player has higher card
     if (pHand[0].value > cHand[0].value) {
-        // Add both cards to bottom of player’s deck
+        // Add cards from both hands to player's deck (LiFo)
+        while (pHand.length) {
+            pDeck.unshift(pHand.shift(),cHand.shift());
+        }
+        // both pile to player's deck
+        while (pPile.length) {
+            pDeck.unshift(pPile.pop())
+            pDeck.unshift(cPile.pop())
+        }
 
     }
+    // If computer has higher card
+    else if (cHand[0].value > pHand[0].value) {
+        // Add both hands to computer's deck (LiFo)
+        while (cHand.length) {
+            cDeck.unshift(cHand.shift(),pHand.shift());
+        }
+        // add both pile to computer's deck
+        while (cPile.length > 0) {
+            cDeck.unshift(pPile.pop())
+            cDeck.unshift(cPile.pop())
+        }
+    }
+    // if equal value
+    else {
+        // War
+        // Change background
+
+        // Sound
+
+        // 3 cards from each player's deck to pile
+        for (let i = 0 ; i < 3; i++) {
+            cPile.push(cDeck.pop());
+            pPile.push(pDeck.pop());
+        }
+        // 1 card from end of deck to front of hand
+        pHand.unshift(pDeck.pop());
+        cHand.unshift(cDeck.pop());
+        getWinner();
+        
+    }
+    console.log(pDeck)
+    console.log(cDeck)
+    console.log(pHand)
+    console.log(cHand)
+    // Check for winner of game
+
+
+    
     // Else if player card is of lower value than computer’s card
     // Add both cards to bottom of computer’s deck
     // Else player and computer goes to war

@@ -13,7 +13,14 @@ body {
 .infoBtn {
   width: 50px;
 }
+.cPile,.pPile,.pHand,.cHand {
+  display: none;
+}
 
+.round {
+  font-size: 20px;
+  margin: 10px;
+}
 .btns {
   margin: 20px;
 }
