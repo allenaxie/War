@@ -13,7 +13,7 @@ Render:
 -> repeat until player wins all the cards or at round 50, 
 -> sudden death: winner of next round wins
 
-max turns = 50 (larger deck wins)
+max turns = 50 (sudden death)
 
 Tasks:
 
@@ -37,6 +37,7 @@ const cardLookUp = {
     "K": 13,
     "A": 14,
 };
+
 const masterDeck = buildMasterDeck();
 let shuffledDeck = getNewShuffledDeck();
 
@@ -73,7 +74,7 @@ function getNewShuffledDeck() {
 
 //////////////////////////////    App's state (variables)    ////////////////////////////
 
-let round, winner, pPile, cPile, pHand, cHand, pDeck, cDeck;
+let round, winner, pPile, cPile, pHand, cHand, pDeck, cDeck, warStatus, warCards;
 
 
 //////////////////////////////    Cached element references    ////////////////////////////
@@ -81,9 +82,7 @@ let pHandEl = document.querySelector(".pHand");
 let cHandEl = document.querySelector(".cHand");
 let pPileEl = document.querySelector(".pPile");
 let cPileEl = document.querySelector(".cPile");
-
 let pCardBtnEl = document.querySelector(".pCardBtn");
-
 let roundEl = document.querySelector(".round");
 
 
@@ -116,10 +115,10 @@ function init() {
     cHand = [cDeck.pop()];
     round = 1;
     winner = null;
+    warStatus = false;
+    warCards = 0;
     render();
-}
-
-
+};
 
 function render() {
     // Display first card of player's hand 
@@ -130,12 +129,15 @@ function render() {
     cHandEl.innerHTML = cardTemplate2;
     // Update round number onto DOM
     roundEl.innerHTML = `Round: ${round}`;
+    // show pile for War
     if (cPile.length) {
         cPileEl.style.display = "inline-block";
         pPileEl.style.display = "inline-block";
+    } else {
+        cPileEl.style.display = "none";
+        pPileEl.style.display = "none";
     }
-}
-
+};
 
 function handleMove() {
     // if first turn, show card 
@@ -154,7 +156,7 @@ function handleMove() {
     render();
     // Check for winner
     getWinner();
-}
+};
 
 
 function getWinner() {
@@ -170,7 +172,6 @@ function getWinner() {
             pDeck.unshift(pPile.pop())
             pDeck.unshift(cPile.pop())
         }
-
     }
     // If computer has higher card
     else if (cHand[0].value > pHand[0].value) {
@@ -187,35 +188,37 @@ function getWinner() {
     // if equal value
     else {
         // War
+        warStatus = true;
         // Change background
 
         // Sound
-
-        // 3 cards from each player's deck to pile
-        for (let i = 0 ; i < 3; i++) {
-            cPile.push(cDeck.pop());
-            pPile.push(pDeck.pop());
-        }
-        // 1 card from end of deck to front of hand
-        pHand.unshift(pDeck.pop());
-        cHand.unshift(cDeck.pop());
-        getWinner();
         
+        // display War time message: Play 4 more cards
+
+        
+        
+        // for (let i = 0 ; i < 3; i++) {
+        //     cPile.push(cDeck.pop());
+        //     pPile.push(pDeck.pop());
+        // }
+        // // 1 card from end of deck to front of hand
+        // pHand.unshift(pDeck.pop());
+        // cHand.unshift(cDeck.pop());
+        // getWinner();
     }
-    console.log(pDeck)
-    console.log(cDeck)
-    console.log(pHand)
-    console.log(cHand)
+
+
     // Check for winner of game
-
-
-    
-    // Else if player card is of lower value than computer’s card
-    // Add both cards to bottom of computer’s deck
-    // Else player and computer goes to war
-    // Both sides add 3 more cards face down to pile, flip 4th card face up
-    // handleMove()
     // If player’s deck or computer’s deck is empty, display winner
+    if (!pDeck.length) {
+        // computer wins!
+    }
+    else if (!cDeck.length) {
+        // player wins!
+    }
+    else if (round > 50) {
+        // winner of next round wins the game!
+    }
     
     // Else if round is greater than 50
     // If player’s deck count is greater than computer’s deck count
@@ -225,8 +228,34 @@ function getWinner() {
     // Else 
     // Play one more round and winner of next round wins the game
 
-}
+};
 
+function warTime () {
+    warCards++;
+    console.log(warCards);
+    // if first 3 cards of war
+    if (warCards < 4) {
+        // add card from player deck to player pile
+        pPile.push(pDeck.pop());
+        // add card from computer deck to computer pile
+        cPile.push(cDeck.pop());
+        console.log(cPile,pPile)
+    }
+    else if (warCards === 4) {
+        // add card from player deck to player hand
+        pHand.unshift(pDeck.pop());
+        console.log(pHand);
+        // add card from computer deck to computer hand
+        cHand.unshift(cDeck.pop());
+        console.log(cHand);
+        // turn off war status
+        warStatus = false;
+        // reset warCards
+        warCards = 0;
+    }
+    render();
+    getWinner();
+}
 
 
 //////////////////////////////    Event Listeners    ////////////////////////////
@@ -235,7 +264,10 @@ function getWinner() {
 // Rules button
 
 // Play card button
-pCardBtnEl.addEventListener("click", handleMove);
+pCardBtnEl.addEventListener("click", function (e) {
+    // if warStatus = false, normal click
+    return (!warStatus) ? handleMove() : warTime();
+});
 
 
 // Shuffle deck button

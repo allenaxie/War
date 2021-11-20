@@ -13,7 +13,7 @@ body {
 .infoBtn {
   width: 50px;
 }
-.cPile,.pPile,.pHand,.cHand {
+.cPile,.pPile,.pHand,.cHand,.warMsg {
   display: none;
 }
 
