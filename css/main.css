@@ -9,7 +9,6 @@ body {
   /* background-image: linear-gradient(180deg, #985E6D 0%, #494E6B 50%,#192231 100%); */
   background: rgb(37, 37, 37);
   color: white;
-
 }
 
 header {
@@ -21,7 +20,6 @@ header {
   text-align: center;
   display: flex;
   justify-content: center;
-
 }
 
 .gameScreen {
@@ -138,9 +136,10 @@ header {
 }
 
 
-.cPile,.pPile,.pHand,.cHand,.warMsg,.pDeckCount,.cDeckCount{
+.cPile,.pPile,.pHand,.cHand,.warMsg,.winMsg{
   display: none;
 }
+
 .rulesMsg {
   color: white;
   width: 400px;
@@ -174,11 +173,61 @@ header {
   cursor: pointer;
 }
 
-
 .round {
   font-size: 20px;
   margin: 10px;
 }
+
 .btns {
   margin: 20px;
+}
+
+.computerHP {
+  display: flex;
+}
+
+.playerHP {
+  display: flex;
+}
+
+.pPile {
+  text-align: left;
+}
+
+.cDeckContainer,.pDeckContainer {
+  display: flex;
+}
+
+.cDeckCount {
+  margin: 10px;
+}
+
+.pDeckCount {
+  margin: 10px;
+  margin-top: 75px;
+}
+
+.warMsg {
+  background: rgb(214, 167, 67);
+  padding: 8px;
+  position: absolute;
+  text-align: center;
+  bottom: 200px;
+  left: 200px;
+}
+
+.suddenDeath {
+  background: black;
+  text-align: center;
+  padding: 20px;
+  width: 400px;
+  position: absolute;
+  top: 300px;
+  right: 200px;
+  border: groove;
+  display: none;
+}
+.suddenDeath > span {
+  font-size: 30px;
+  text-decoration: underline;
 }

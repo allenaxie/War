@@ -13,9 +13,10 @@ Render:
 -> repeat until player wins all the cards or at round 300, 
 -> sudden death: winner of next round wins
 
-max turns = 300 (sudden death)
+max turns = 150 (sudden death)
 
 Tasks:
+max turns = 150 (sudden death)
 - Title screen
     - Rules
     - Settings
@@ -31,7 +32,9 @@ Tasks:
 - title screen
     - just title and play button with background image
     - click play to auto scroll lower and play game 
-
+- war message
+    - update number of cards to play during WAR
+    - display message for who wins WAR 
 
 */
 
@@ -101,6 +104,7 @@ let playBtnEl = document.querySelector(".playBtn");
 let pCardBtnEl = document.querySelector(".pCardBtn");
 let infoBtnEl = document.querySelector(".infoBtn");
 let homeRulesBtnEl = document.querySelector(".homeRulesBtn")
+let gameRulesBtnEl = document.querySelector(".gameRulesBtn")
 let rulesOKBtnEl = document.getElementById("ok");
 // Messages
 let roundEl = document.querySelector(".round");
@@ -110,6 +114,7 @@ let rulesMsgEl = document.querySelector(".rulesMsg");
 let shuffleBtnEl = document.querySelector(".shuffleBtn");
 let cDeckCountEl = document.querySelector(".cDeckCount");
 let pDeckCountEl = document.querySelector(".pDeckCount");
+let suddenDeathEl = document.querySelector(".suddenDeath");
 
 
 //////////////////////////////    Functions    ////////////////////////////
@@ -228,15 +233,17 @@ function getWinner() {
     // If player’s deck or computer’s deck is empty, display winner
     if (!pDeck.length) {
         // computer wins!
-        winMsgEl.innerHTML = `Defeat! <br> Computer wins!`
+        winMsgEl.innerHTML = `Defeat! <br> Computer wins!`;
+        winMsgEl.stlye.display = "inline-block";
     }
     else if (!cDeck.length) {
         // player wins!
-        winMsgEl.innerHTML = `Victory! <br> You win! `
+        winMsgEl.innerHTML = `Victory! <br> You win! `;
+        winMsgEl.stlye.display = "inline-block";
     }
-    else if (round === 200) {
+    else if (round === 10) {
         // winner of next round wins the game!
-        
+        suddenDeathEl.style.display = "inline-block"
     }
 };
 
@@ -284,24 +291,9 @@ function shufflePDeck() {
 
 
 //////////////////////////////    Event Listeners    ////////////////////////////
-// Hover over either deck to show deck count of both players
-cDeckEl.addEventListener("mouseenter", function () {
-    cDeckCountEl.style.display = "inline";
-    pDeckCountEl.style.display = "inline";
-});
-cDeckEl.addEventListener("mouseleave", function () {
-    cDeckCountEl.style.display = "none";
-    pDeckCountEl.style.display = "none";
-});
 
-pDeckEl.addEventListener("mouseenter", function () {
-    cDeckCountEl.style.display = "inline";
-    pDeckCountEl.style.display = "inline";
-});
-pDeckEl.addEventListener("mouseleave", function () {
-    cDeckCountEl.style.display = "none";
-    pDeckCountEl.style.display = "none";
-});
+
+
 
 //Play button
 playBtnEl.addEventListener("click", function () {
@@ -310,8 +302,12 @@ playBtnEl.addEventListener("click", function () {
     $(".gameScreen").fadeIn();
 })
 
-// Rules button
+// Home Rules button
 homeRulesBtnEl.addEventListener("click",function() {
+    rulesMsgEl.style.display = "inline-block";
+})
+// Game Rules button
+gameRulesBtnEl.addEventListener("click",function() {
     rulesMsgEl.style.display = "inline-block";
 })
 // Rules OK button
@@ -321,6 +317,11 @@ rulesOKBtnEl.addEventListener("click",function () {
 
 // Play card button
 pCardBtnEl.addEventListener("click", function (e) {
+    // if warStatus = false, normal click
+    return (!warStatus) ? handleMove() : warTime();
+});
+// Click player deck to also play next card
+pDeckEl.addEventListener("click", function () {
     // if warStatus = false, normal click
     return (!warStatus) ? handleMove() : warTime();
 });

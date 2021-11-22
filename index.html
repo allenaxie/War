@@ -40,27 +40,37 @@
         <button class="homeSettingsBtn">SETTINGS</button>
     </div>
     <main class="gameScreen">
-        <div class= "round">Round: 1 </div>
-        <div class= "card back cDeck decks "></div>
-        <div class="cDeckCount"></div>
-        <div class="field">
-            <div class="cHand"></div>
-            <div class="cPile card back"></div>
-            <div class="pPile card back"></div>
-            <div class="pHand"></div>
+        <div class = "round">Round: 1 </div>
+        <div class = "cDeckContainer">
+            <div class = "card back cDeck decks "></div>
+            <div class = "cDeckCount"></div>
         </div>
-        <div class="card back pDeck decks"></div>
-        <div class="pDeckCount"></div>
+        <div class="field">
+            <div class="computerHP">
+                <div class="cHand"></div>
+                <div class="cPile card back"></div>
+            </div>
+            <div class="playerHP">
+                <div class="pPile card back"></div>
+                <div class="pHand"></div>
+            </div>
+        </div>
+        <div class="pDeckContainer">
+            <div class="card back pDeck decks"></div>
+            <div class="pDeckCount"></div>
+        </div>
         <div class="mainBtns">
             <button class="pCardBtn btns">Play card</button>
             <button class="shuffleBtn btns">Shuffle Deck</button>
-            <button class="rulesBtn btns">Rules</button>
-            <button class="settingsBtn btns">Settings</button>
+            <button class="gameRulesBtn btns">Rules</button>
+            <button class="gameSettingsBtn btns">Settings</button>
         </div> 
     </main>
     <div class="messages">
         <div class="warMsg">Time for WAR! Play 4 cards.</div>
-        <div class="winMsg"></div>
+        <div class="winMsg">
+            <button>Play Again</button>
+        </div>
         <div class="rulesMsg"><span id="howTo">How to play</span> <br>
             <br> <span class="rulesHeadings">Setup</span> <br><br>Each player receives 26 cards into their deck. <br>
             <br> <span class="rulesHeadings">Gameplay</span><br><br> Play the next card in your deck. If you'd 
@@ -76,7 +86,9 @@
             repeat WAR until one side wins the round. <br>
             <br> <span class="rulesHeadings">Goal</span><br><br>Win all 52 cards before your opponent! <br><br>
             <a id="ok"> OK</a>
-            
+        </div>
+        <div class = "suddenDeath">
+            <span>SUDDEN DEATH</span> <br><br> Winner of next round wins the game!!
         </div>
     </div>
     
