@@ -76,11 +76,13 @@ header {
 .homeScreen {
   margin-top: 30px;
   text-align: center;
+
 }
 
 .pNameInput {
   text-align: center;
-  margin-top: 100px;
+  margin-top: 150px;
+  margin-left: 110px;
   font-size: 25px;
   display: flex;
 }
@@ -88,9 +90,9 @@ header {
 .playBtn {
   text-align: center;
   background: linear-gradient(180deg,#3c5964 0%, #293d43 120%);
-  border-radius: 20%;
   padding: 20px;
-  font-size: 40px;
+  font-size: 35px;
+  width: 200px;
   display: block;
   position: relative;
   margin-top: 40px;
@@ -104,21 +106,19 @@ header {
 .homeRulesBtn {
   text-align: center;
   background: linear-gradient(180deg,#3c5964 0%, #293d43 120%);
-  border-radius: 20%;
   padding: 20px;
   font-size: 30px;
   display: inline;
-  margin-left: 120px;
+  margin-left: 30px;
   cursor: pointer;
 }
 
 .homeSettingsBtn {
   text-align: center;
   background: linear-gradient(180deg,#3c5964 0%, #293d43 120%);
-  border-radius: 20%;
   padding: 20px;
   font-size: 30px;
-  margin-top: 150px;
+  margin-top: 120px;
   display: inline;
   margin-left: 100px;
   cursor: pointer;

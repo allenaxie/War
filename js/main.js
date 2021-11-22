@@ -88,7 +88,7 @@ function getNewShuffledDeck() {
 
 //////////////////////////////    App's state (variables)    ////////////////////////////
 
-let round, winner, pPile, cPile, pHand, cHand, pDeck, cDeck, warStatus, warCards, roundsRemain;
+let player,round, winner, pPile, cPile, pHand, cHand, pDeck, cDeck, warStatus, warCards, roundsRemain;
 
 
 //////////////////////////////    Cached element references    ////////////////////////////
@@ -106,6 +106,7 @@ let infoBtnEl = document.querySelector(".infoBtn");
 let homeRulesBtnEl = document.querySelector(".homeRulesBtn")
 let gameRulesBtnEl = document.querySelector(".gameRulesBtn")
 let rulesOKBtnEl = document.getElementById("ok");
+let pNameInputEl = document.querySelector(".pNameInput");
 // Messages
 let roundEl = document.querySelector(".round");
 let warMsgEl = document.querySelector(".warMsg");
@@ -146,6 +147,7 @@ function init() {
     warStatus = false;
     roundsRemain = null;
     warCards = 0;
+    player = {};
     render();
 };
 
@@ -302,9 +304,16 @@ function shufflePDeck() {
 
 //Play button
 playBtnEl.addEventListener("click", function () {
-    $("header").fadeOut();
-    $(".homeScreen").fadeOut();
-    $(".gameScreen").fadeIn();
+    if (pNameInputEl.value) {
+        player.name = pNameInputEl.value;
+        document.querySelector(".pName").innerText = player.name
+        $("header").fadeOut();
+        $(".homeScreen").fadeOut();
+        // Delay game screen fade in
+        setTimeout(function() {
+            $(".gameScreen").fadeIn();
+        },350);
+    }
 })
 
 // Home Rules button
