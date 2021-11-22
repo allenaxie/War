@@ -8,6 +8,7 @@
     <link href="css/card-deck-css/css/cardstarter.css" rel="stylesheet"/>
     <link href="css/main.css" rel="stylesheet" type="text/css" />
     <script defer src="js/main.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 </head>
 <body>
     <header>
@@ -35,8 +36,10 @@
     <div class="homeScreen">
         <input type="name" class="pNameInput" placeholder = "Enter player name">
         <button class="playBtn">Play</button>
+        <button class="homeRulesBtn">RULES</button>
+        <button class="homeSettingsBtn">SETTINGS</button>
     </div>
-    <main>
+    <main class="gameScreen">
         <div class= "round">Round: 1 </div>
         <div class= "card back cDeck decks "></div>
         <div class="cDeckCount"></div>
@@ -53,13 +56,28 @@
             <button class="shuffleBtn btns">Shuffle Deck</button>
             <button class="rulesBtn btns">Rules</button>
             <button class="settingsBtn btns">Settings</button>
-        </div>
-        <div></div>    
+        </div> 
     </main>
     <div class="messages">
         <div class="warMsg">Time for WAR! Play 4 cards.</div>
         <div class="winMsg"></div>
-        <div class="rulesMsg"></div>
+        <div class="rulesMsg"><span id="howTo">How to play</span> <br>
+            <br> <span class="rulesHeadings">Setup</span> <br><br>Each player receives 26 cards into their deck. <br>
+            <br> <span class="rulesHeadings">Gameplay</span><br><br> Play the next card in your deck. If you'd 
+            like you may shuffle your deck once per turn. <br><br>
+            Each round, the player with the higher ranking card in their hand
+            wins the round. Winner of each round takes all the cards from both
+            players' hands into their deck.
+            If both player has the same ranking card in their hand, go to WAR! <br>
+            <br> <span class="rulesHeadings">WAR</span><br> <br>Both players must play 4 more cards consecutively. 
+            3 of those cards face down into the "pile" and the 4th card face up
+            into their hand. <br><br>Player with the higher ranking card in their hand takes
+            all the cards from each players' hand and pile. If 4th card is of same rank,
+            repeat WAR until one side wins the round. <br>
+            <br> <span class="rulesHeadings">Goal</span><br><br>Win all 52 cards before your opponent! <br><br>
+            <a id="ok"> OK</a>
+            
+        </div>
     </div>
     
     

@@ -17,6 +17,8 @@ max turns = 300 (sudden death)
 
 Tasks:
 - Title screen
+    - Rules
+    - Settings
 - shuffle deck button
 - win game logic 
 - rules message
@@ -95,16 +97,19 @@ let cPileEl = document.querySelector(".cPile");
 let pDeckEl = document.querySelector(".pDeck");
 let cDeckEl = document.querySelector(".cDeck");
 // Buttons
+let playBtnEl = document.querySelector(".playBtn");
 let pCardBtnEl = document.querySelector(".pCardBtn");
 let infoBtnEl = document.querySelector(".infoBtn");
+let homeRulesBtnEl = document.querySelector(".homeRulesBtn")
+let rulesOKBtnEl = document.getElementById("ok");
 // Messages
 let roundEl = document.querySelector(".round");
 let warMsgEl = document.querySelector(".warMsg");
 let winMsgEl = document.querySelector(".winMsg");
+let rulesMsgEl = document.querySelector(".rulesMsg");
 let shuffleBtnEl = document.querySelector(".shuffleBtn");
 let cDeckCountEl = document.querySelector(".cDeckCount");
 let pDeckCountEl = document.querySelector(".pDeckCount");
-
 
 
 //////////////////////////////    Functions    ////////////////////////////
@@ -298,8 +303,21 @@ pDeckEl.addEventListener("mouseleave", function () {
     pDeckCountEl.style.display = "none";
 });
 
+//Play button
+playBtnEl.addEventListener("click", function () {
+    $("header").fadeOut();
+    $(".homeScreen").fadeOut();
+    $(".gameScreen").fadeIn();
+})
 
 // Rules button
+homeRulesBtnEl.addEventListener("click",function() {
+    rulesMsgEl.style.display = "inline-block";
+})
+// Rules OK button
+rulesOKBtnEl.addEventListener("click",function () {
+    rulesMsgEl.style.display = "none";
+})
 
 // Play card button
 pCardBtnEl.addEventListener("click", function (e) {
