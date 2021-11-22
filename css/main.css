@@ -6,30 +6,102 @@ body {
   justify-content: center;
   height: 100vh;
   width: 100%;
-  background-image: linear-gradient(180deg, #985E6D 0%, #494E6B 50%,#192231 100%);
+  /* background-image: linear-gradient(180deg, #985E6D 0%, #494E6B 50%,#192231 100%); */
+  background: rgb(37, 37, 37);
 }
 
 header {
-  display:inline-block;
-}
-header > h1 {
-  font-family: Marcellus;
-  color: goldenrod;
-  font-size: 50px;
+  display:flex;
 }
 
-.infoBtn {
-  width: 1.5em;
-  height: 1.2em;
-  left: 30px;
-  top: 10px;
-  position: absolute;
+.warTitle {
+  width: 400px;
+}
+.title {
+  font-family: Marcellus;
+  color: rgb(218, 165, 32);
+  font-size: 40px;
+  margin-left: 10px;
+  margin-top: 0px;
+  border: groove;
   border-radius: 50%;
-  border: black;
-  border-style: double;
+  width: 55px;
+  height: 55px;
   text-align: center;
+  padding: 3px;
+  border-color: rgb(218, 165, 32);
+}
+/* 
+.navbar {
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  position: sticky;
+  z-index: 999;
+  margin-top: 20px;
+}
+
+.navContainer {
+  display: flex;
+  justify-content: space-between;
+  height: 80px;
+  z-index: 1;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 50px;
+}
+
+.navbarMenu {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  text-align: center;
+}
+
+.navbarLinks {
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 1rem;
+  height: 100%;
+  text-decoration: none;
   cursor: pointer;
 }
+.navbarLinks:hover {
+  color: rgb(218, 165, 32);;
+  transition: all 0.3s ease;
+} */
+
+.homeScreen {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.pNameInput {
+  text-align: center;
+  margin-top: 80px;
+  font-size: 25px;
+}
+
+.playBtn {
+  text-align: center;
+  background: linear-gradient(180deg, rgb(204, 106, 82)  0%,rgb(238, 82, 20)130%);
+  border-radius: 20%;
+  padding: 10px;
+  font-size: 50px;
+  display: block;
+  position: relative;
+  margin-top: 90px;
+  margin-left: 150px;
+  cursor: pointer;
+}
+.playBtn:hover {
+  background: linear-gradient(90deg,rgb(247, 141, 114) 0%,rgba(253, 111, 55, 0.644) 130%);
+}
+
 
 .cPile,.pPile,.pHand,.cHand,.warMsg,.pDeckCount,.cDeckCount{
   display: none;

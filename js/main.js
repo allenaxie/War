@@ -16,6 +16,7 @@ Render:
 max turns = 300 (sudden death)
 
 Tasks:
+- Title screen
 - shuffle deck button
 - win game logic 
 - rules message
@@ -95,6 +96,7 @@ let pDeckEl = document.querySelector(".pDeck");
 let cDeckEl = document.querySelector(".cDeck");
 // Buttons
 let pCardBtnEl = document.querySelector(".pCardBtn");
+let infoBtnEl = document.querySelector(".infoBtn");
 // Messages
 let roundEl = document.querySelector(".round");
 let warMsgEl = document.querySelector(".warMsg");
@@ -275,6 +277,7 @@ function shufflePDeck() {
     // disable after one use per round 
 }
 
+
 //////////////////////////////    Event Listeners    ////////////////////////////
 // Hover over either deck to show deck count of both players
 cDeckEl.addEventListener("mouseenter", function () {
@@ -294,6 +297,7 @@ pDeckEl.addEventListener("mouseleave", function () {
     cDeckCountEl.style.display = "none";
     pDeckCountEl.style.display = "none";
 });
+
 
 // Rules button
 
