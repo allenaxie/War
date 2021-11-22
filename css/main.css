@@ -1,21 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Marcellus&family=Bungee+Shade&family=Source+Code+Pro:wght@300&display=swap');
+
 body {
   display: grid;
   margin: 20px;
   justify-content: center;
   height: 100vh;
   width: 100%;
+  background-image: linear-gradient(180deg, #985E6D 0%, #494E6B 50%,#192231 100%);
 }
 
-.title > h1 {
-  display: inline-block;
+header {
+  display:inline-block;
+}
+header > h1 {
+  font-family: Marcellus;
+  color: goldenrod;
+  font-size: 50px;
 }
 
 .infoBtn {
-  width: 50px;
+  width: 1.5em;
+  height: 1.2em;
+  left: 30px;
+  top: 10px;
+  position: absolute;
+  border-radius: 50%;
+  border: black;
+  border-style: double;
+  text-align: center;
+  cursor: pointer;
 }
-.cPile,.pPile,.pHand,.cHand,.warMsg {
+
+.cPile,.pPile,.pHand,.cHand,.warMsg,.pDeckCount,.cDeckCount{
   display: none;
 }
+
 
 .round {
   font-size: 20px;

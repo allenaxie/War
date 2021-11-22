@@ -10,13 +10,12 @@ Render:
     -> side with larger card adds all the cards from pile into their deck 
 
 - Each turn, player may click "shuffle" button or "play card" button
--> repeat until player wins all the cards or at round 50, 
+-> repeat until player wins all the cards or at round 300, 
 -> sudden death: winner of next round wins
 
-max turns = 50 (sudden death)
+max turns = 300 (sudden death)
 
 Tasks:
-
 - shuffle deck button
 - win game logic 
 - rules message
@@ -26,6 +25,9 @@ Tasks:
     - Able to set number of rounds before a winner is declared (30, 50, unlimited)
 - change background when its time for "War"
     - add sound effect for war
+- title screen
+    - just title and play button with background image
+    - click play to auto scroll lower and play game 
 
 
 */
@@ -89,12 +91,17 @@ let pHandEl = document.querySelector(".pHand");
 let cHandEl = document.querySelector(".cHand");
 let pPileEl = document.querySelector(".pPile");
 let cPileEl = document.querySelector(".cPile");
+let pDeckEl = document.querySelector(".pDeck");
+let cDeckEl = document.querySelector(".cDeck");
 // Buttons
 let pCardBtnEl = document.querySelector(".pCardBtn");
 // Messages
 let roundEl = document.querySelector(".round");
 let warMsgEl = document.querySelector(".warMsg");
+let winMsgEl = document.querySelector(".winMsg");
 let shuffleBtnEl = document.querySelector(".shuffleBtn");
+let cDeckCountEl = document.querySelector(".cDeckCount");
+let pDeckCountEl = document.querySelector(".pDeckCount");
 
 
 
@@ -137,6 +144,9 @@ function render() {
     cHandEl.innerHTML = cardTemplate2;
     // Update round number onto DOM
     roundEl.innerHTML = `Round: ${round}`;
+    // deck count
+    cDeckCountEl.innerHTML = `${cDeck.length} cards`
+    pDeckCountEl.innerHTML = `${pDeck.length} cards`
     // show pile for War
     if (cPile.length) {
         cPileEl.style.display = "inline-block";
@@ -211,25 +221,16 @@ function getWinner() {
     // If player’s deck or computer’s deck is empty, display winner
     if (!pDeck.length) {
         // computer wins!
-        console.log("computer wins")
+        winMsgEl.innerHTML = `Defeat! <br> Computer wins!`
     }
     else if (!cDeck.length) {
         // player wins!
-        console.log("player wins")
+        winMsgEl.innerHTML = `Victory! <br> You win! `
     }
-    else if (round === 50) {
+    else if (round === 200) {
         // winner of next round wins the game!
-        console.log("SUDDEN DEATH")
+        
     }
-
-    // Else if round is greater than 50
-    // If player’s deck count is greater than computer’s deck count
-    // Player wins
-    // Else if player’s deck count is less than computer’s deck count
-    // Computer wins
-    // Else 
-    // Play one more round and winner of next round wins the game
-
 };
 
 function warTime() {
@@ -256,6 +257,7 @@ function warTime() {
 }
 
 function shufflePDeck() {
+    // sound effect
     // Create temporary deck
     let tempDeck = [];
     // while pDeck.length is true
@@ -270,10 +272,28 @@ function shufflePDeck() {
         return card;
     });
     return pDeck;
+    // disable after one use per round 
 }
 
 //////////////////////////////    Event Listeners    ////////////////////////////
+// Hover over either deck to show deck count of both players
+cDeckEl.addEventListener("mouseenter", function () {
+    cDeckCountEl.style.display = "inline";
+    pDeckCountEl.style.display = "inline";
+});
+cDeckEl.addEventListener("mouseleave", function () {
+    cDeckCountEl.style.display = "none";
+    pDeckCountEl.style.display = "none";
+});
 
+pDeckEl.addEventListener("mouseenter", function () {
+    cDeckCountEl.style.display = "inline";
+    pDeckCountEl.style.display = "inline";
+});
+pDeckEl.addEventListener("mouseleave", function () {
+    cDeckCountEl.style.display = "none";
+    pDeckCountEl.style.display = "none";
+});
 
 // Rules button
 
