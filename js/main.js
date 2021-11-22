@@ -13,10 +13,10 @@ Render:
 -> repeat until player wins all the cards or at round 300, 
 -> sudden death: winner of next round wins
 
-max turns = 150 (sudden death)
+
 
 Tasks:
-max turns = 150 (sudden death)
+- rounds remaining : max 120
 - Title screen
     - Rules
     - Settings
@@ -88,7 +88,7 @@ function getNewShuffledDeck() {
 
 //////////////////////////////    App's state (variables)    ////////////////////////////
 
-let round, winner, pPile, cPile, pHand, cHand, pDeck, cDeck, warStatus, warCards;
+let round, winner, pPile, cPile, pHand, cHand, pDeck, cDeck, warStatus, warCards, roundsRemain;
 
 
 //////////////////////////////    Cached element references    ////////////////////////////
@@ -110,11 +110,12 @@ let rulesOKBtnEl = document.getElementById("ok");
 let roundEl = document.querySelector(".round");
 let warMsgEl = document.querySelector(".warMsg");
 let winMsgEl = document.querySelector(".winMsg");
+let winMsgContainer = document.querySelector(".winMsgContainer");
 let rulesMsgEl = document.querySelector(".rulesMsg");
 let shuffleBtnEl = document.querySelector(".shuffleBtn");
 let cDeckCountEl = document.querySelector(".cDeckCount");
 let pDeckCountEl = document.querySelector(".pDeckCount");
-let suddenDeathEl = document.querySelector(".suddenDeath");
+let roundsRemainEl = document.querySelector(".roundsRemain");
 
 
 //////////////////////////////    Functions    ////////////////////////////
@@ -143,6 +144,7 @@ function init() {
     round = 1;
     winner = null;
     warStatus = false;
+    roundsRemain = null;
     warCards = 0;
     render();
 };
@@ -173,8 +175,8 @@ function render() {
 function handleMove() {
     // if first turn, show card 
     if (round === 1) {
-        pHandEl.style.display = "block";
-        cHandEl.style.display = "block";
+        pHandEl.style.opacity = 1;
+        cHandEl.style.opacity = 1;
     }
     else {
         // Play the next card from the player’s deck and computer’s deck
@@ -231,19 +233,22 @@ function getWinner() {
 
     // Check for winner of game
     // If player’s deck or computer’s deck is empty, display winner
-    if (!pDeck.length) {
+    if (pDeck.length === 0) {
         // computer wins!
-        winMsgEl.innerHTML = `Defeat! <br> Computer wins!`;
-        winMsgEl.stlye.display = "inline-block";
+        winMsgEl.innerHTML = `DEFEAT! <br> Computer wins!`;
+        winMsgContainer.style.display = "inline-block";
+        winMsgContainer.style.background = "linear-gradient(rgb(236, 49, 49) 0%,rgb(250, 115, 25) 150%)";
     }
-    else if (!cDeck.length) {
+    else if (cDeck.length === 0) {
         // player wins!
-        winMsgEl.innerHTML = `Victory! <br> You win! `;
-        winMsgEl.stlye.display = "inline-block";
+        winMsgEl.innerHTML = `VICTORY! <br> You win! `;
+        winMsgContainer.style.display = "inline-block";
+        winMsgContainer.style.background = "linear-gradient(rgb(3, 206, 131) 0%,rgb(4, 158, 4)150%);";
     }
-    else if (round === 10) {
+    else if (round > 110) {
         // winner of next round wins the game!
-        suddenDeathEl.style.display = "inline-block"
+        roundsRemainEl.style.display = "inline-block"
+        roundsRemainEl.innerHTML = `<span>Rounds remaining: </span> <br><br> ${120 - round}`
     }
 };
 

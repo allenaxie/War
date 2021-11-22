@@ -15,24 +15,6 @@
         <img class= "warTitle" src="images/WAR title2.png">
         <h1 class="title">戰</h1>
     </header>
-    <!-- <nav class="navbar">
-        <div class="navContainer">
-            <ul class="navbarMenu">
-                <li class="navbarItem">
-                    <a class="navbarLinks">Home</a>
-                </li>
-                <li class="navbarItem">
-                    <a class="navbarLinks">About</a>
-                </li>
-                <li class= "narbarItem">
-                    <a class="navbarLinks">Rules</a>
-                </li>
-                <li class="navbarItem">
-                    <a class="navbarLinks">Settings</a>
-                </li>
-            </ul>
-        </div>
-    </nav> -->
     <div class="homeScreen">
         <input type="name" class="pNameInput" placeholder = "Enter player name">
         <button class="playBtn">Play</button>
@@ -40,7 +22,18 @@
         <button class="homeSettingsBtn">SETTINGS</button>
     </div>
     <main class="gameScreen">
+        <div class = "gameScreenTitle">
+            <img class= "gsWarTitle" src="images/WAR title2.png">
+            <h1 class="gsTitle">戰</h1>
+        </div>
         <div class = "round">Round: 1 </div>
+        <div>
+            <div class = "computer">
+                <div class = "cIcon"></div>
+                <div class = "cName">Computer</div>
+
+            </div>
+        </div>
         <div class = "cDeckContainer">
             <div class = "card back cDeck decks "></div>
             <div class = "cDeckCount"></div>
@@ -59,6 +52,12 @@
             <div class="card back pDeck decks"></div>
             <div class="pDeckCount"></div>
         </div>
+        <div>
+            <div class = "player">
+                <div class = "pIcon"></div>
+                <div class = "pName">Player</div>
+            </div>
+        </div>
         <div class="mainBtns">
             <button class="pCardBtn btns">Play card</button>
             <button class="shuffleBtn btns">Shuffle Deck</button>
@@ -68,8 +67,9 @@
     </main>
     <div class="messages">
         <div class="warMsg">Time for WAR! Play 4 cards.</div>
-        <div class="winMsg">
-            <button>Play Again</button>
+        <div class="winMsgContainer">
+            <div class = "winMsg"></div>
+            <button class="playAgainBtn">Play Again</button>
         </div>
         <div class="rulesMsg"><span id="howTo">How to play</span> <br>
             <br> <span class="rulesHeadings">Setup</span> <br><br>Each player receives 26 cards into their deck. <br>
@@ -87,8 +87,8 @@
             <br> <span class="rulesHeadings">Goal</span><br><br>Win all 52 cards before your opponent! <br><br>
             <a id="ok"> OK</a>
         </div>
-        <div class = "suddenDeath">
-            <span>SUDDEN DEATH</span> <br><br> Winner of next round wins the game!!
+        <div class = "roundsRemain">
+            
         </div>
     </div>
     

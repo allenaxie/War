@@ -24,6 +24,10 @@ header {
 
 .gameScreen {
   display:none;
+  background: linear-gradient(#293d43 0%, #3c5964 120%);
+  padding: 20px;
+  width: 100%;
+  
 }
 
 .title {
@@ -40,49 +44,34 @@ header {
   padding: 3px;
   border-color: rgb(218, 165, 32);
 }
-/* 
-.navbar {
-  height: 80px;
+
+.gameScreenTitle {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 1.2rem;
-  position: sticky;
-  z-index: 999;
-  margin-top: 20px;
+  position: absolute;
+  left: 20px;
 }
 
-.navContainer {
+.gsWarTitle {
+  width: 100px;
+  text-align: left;
   display: flex;
-  justify-content: space-between;
-  height: 80px;
-  z-index: 1;
-  width: 100%;
-  margin: 0 auto;
-  padding: 0 50px;
+  height: 40px;
 }
 
-.navbarMenu {
-  display: flex;
-  align-items: center;
-  list-style: none;
+.gsTitle {
+  font-family: Marcellus;
+  color: rgb(218, 165, 32);
+  font-size: 15px;
+  margin-left: 0px;
+  margin-top: 0px;
+  border: groove;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
   text-align: center;
+  padding: 3px;
+  border-color: rgb(218, 165, 32);
 }
-
-.navbarLinks {
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0 1rem;
-  height: 100%;
-  text-decoration: none;
-  cursor: pointer;
-}
-.navbarLinks:hover {
-  color: rgb(218, 165, 32);;
-  transition: all 0.3s ease;
-} */
 
 .homeScreen {
   margin-top: 30px;
@@ -135,9 +124,12 @@ header {
   cursor: pointer;
 }
 
-
-.cPile,.pPile,.pHand,.cHand,.warMsg,.winMsg{
+.cPile,.pPile,.warMsg{
   display: none;
+}
+
+.pHand,.cHand {
+  opacity: 0;
 }
 
 .rulesMsg {
@@ -216,18 +208,37 @@ header {
   left: 200px;
 }
 
-.suddenDeath {
-  background: black;
+.winMsgContainer {
   text-align: center;
-  padding: 20px;
-  width: 400px;
+  padding: 10px;
+  width: 200px;
   position: absolute;
   top: 300px;
   right: 200px;
   border: groove;
+  font-size: 20px;
   display: none;
 }
-.suddenDeath > span {
-  font-size: 30px;
-  text-decoration: underline;
+.playAgainBtn {
+  margin-top: 30px;
+  text-align: center;
+  background: linear-gradient(180deg,#7f9aa5 0%, #065e79 100%);
+  cursor: pointer;
 }
+.winMsg > button:hover {
+  background: linear-gradient(180deg,#40606d 0%, #0e7291 120%);
+}
+
+.roundsRemain {
+  background: black;
+  text-align: center;
+  padding: 10px;
+  width: 200px;
+  position: absolute;
+  top: 300px;
+  right: 200px;
+  border: groove;
+  font-size: 20px;
+  display: none;
+}
+
