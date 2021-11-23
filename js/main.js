@@ -67,7 +67,9 @@ function getNewShuffledDeck() {
 
 //////////////////////////////    App's state (variables)    ////////////////////////////
 
-let player,round, winner, pPile, cPile, pHand, cHand, pDeck, cDeck, warStatus, warCards, roundsRemain;
+let player,round, winner, pPile, cPile, pHand, 
+cHand, pDeck, cDeck, warStatus, warCards, roundsRemain
+,shuffled;
 
 
 //////////////////////////////    Cached element references    ////////////////////////////
@@ -131,6 +133,7 @@ function init() {
     roundsRemainEl.style.display = "none";
     warCards = 0;
     player = {};
+    shuffled = 1;
     render();
 };
 
@@ -170,6 +173,9 @@ function handleMove() {
     }
     // Increment round number
     round++;
+    // Reset shuffle status
+    shuffled = 1;
+    shuffleBtnEl.disabled = false;
     // show card on DOM
     render();
     // Check for winner
@@ -238,18 +244,18 @@ function getWinner() {
                 e.style.pointerEvents = "none";
             })
             // player with most cards in deck wins
-            if (pDeck.length > cDeck.length) {
-                winMsgEl.innerHTML = `DEFEAT! <br> Computer wins!`;
+            if (cDeck.length > pDeck.length) {
+                winMsgEl.innerHTML = `DEFEAT! <br> Computer has more cards in their deck!`;
                 winMsgContainer.style.display = "inline-block";
                 winMsgContainer.style.background = "linear-gradient(rgb(236, 49, 49) 0%,rgb(250, 115, 25) 150%)";
             }
-            else if (cDeck.length > pDeck.length) {
-                winMsgEl.innerHTML = `VICTORY! <br> You win! `;
+            else if (pDeck.length > cDeck.length) {
+                winMsgEl.innerHTML = `VICTORY! <br> You have more cards in your card!`;
                 winMsgContainer.style.display = "inline-block";
                 winMsgContainer.style.background = "linear-gradient(rgb(3, 206, 131) 0%,rgb(4, 158, 4) 150%)";
             }
             else {
-                winMsginnerHTML = `You just did the impossible. You tied in a game of War! Congrats!`;
+                winMsginnerHTML = `TIE GAME! You're not a winner or a loser.`;
                 winMsgContainer.style.display = "inline-block";
                 winMsgContainer.style.background = "linear-gradient(90deg,#0162c8,#55e7fc);";  
             }
@@ -276,6 +282,7 @@ function warTime() {
         warStatus = false;
         // reset warCards
         warCards = 0;
+        warMsgEl.style.display = "none";
     }
     warMsgEl.innerHTML = `Time for WAR! Play ${4 - warCards} cards.`
     render();
@@ -283,7 +290,6 @@ function warTime() {
 }
 
 function shufflePDeck() {
-    // sound effect
     // Create temporary deck
     let tempDeck = [];
     // while pDeck.length is true
@@ -332,8 +338,20 @@ rulesOKBtnEl.addEventListener("click",function () {
 })
 // Play card button
 pCardBtnEl.addEventListener("click", function (e) {
+    // play deal card sound
+    document.getElementById("dealCardAudio").play();
     // if warStatus = false, normal click
-    return (!warStatus) ? handleMove() : warTime();
+    if (!warStatus) {
+        handleMove();
+    }
+    else {
+        warTime();
+    }
+    // 1 second per click
+    pCardBtnEl.disabled = true;
+    setTimeout(function () {
+        pCardBtnEl.disabled = false;
+    }, 800);
 });
 // Click player deck to also play next card
 pDeckEl.addEventListener("click", function () {
@@ -341,7 +359,15 @@ pDeckEl.addEventListener("click", function () {
     return (!warStatus) ? handleMove() : warTime();
 });
 // Shuffle deck button
-shuffleBtnEl.addEventListener("click", shufflePDeck);
+shuffleBtnEl.addEventListener("click", function () {
+    if (shuffled === 1) {
+        // sound effect
+        document.getElementById("shuffleCardAudio").play();
+        shuffled *= -1;
+        shuffleBtnEl.disabled = true;
+        shufflePDeck;
+    }
+});
 
 
 
