@@ -1,25 +1,19 @@
 /* War
 Tasks:
-- rounds remaining : max 120
 - Add sounds
+    - deal card
+    - shuffle deck
 - Title screen
-    - Rules
     - Settings
-- shuffle deck button
-- win game logic 
-- rules message
 - settings 
     - different backgrounds
     - Able to change background color theme
     - Able to set number of rounds before a winner is declared (30, 50, unlimited)
 - change background when its time for "War"
     - add sound effect for war
-- title screen
-    - just title and play button with background image
-    - click play to auto scroll lower and play game 
 - war message
-    - update number of cards to play during WAR
-    - display message for who wins WAR 
+    - display message for who wins WAR  "you won the battle!" or
+    "you lost the battle!"
 
 */
 
@@ -92,6 +86,8 @@ let homeRulesBtnEl = document.querySelector(".homeRulesBtn")
 let gameRulesBtnEl = document.querySelector(".gameRulesBtn")
 let rulesOKBtnEl = document.getElementById("ok");
 let pNameInputEl = document.querySelector(".pNameInput");
+let playAgainBtnEl = document.querySelector(".playAgainBtn");
+let btnsEl = document.querySelectorAll(".btns");
 // Messages
 let roundEl = document.querySelector(".round");
 let warMsgEl = document.querySelector(".warMsg");
@@ -131,6 +127,8 @@ function init() {
     winner = null;
     warStatus = false;
     roundsRemain = null;
+    winMsgContainer.style.display = "none";
+    roundsRemainEl.style.display = "none";
     warCards = 0;
     player = {};
     render();
@@ -236,6 +234,9 @@ function getWinner() {
         roundsRemainEl.style.display = "inline-block"
         roundsRemainEl.innerHTML = `<span>Rounds remaining: </span> <br><br> ${120 - round}`
         if (round === 120) {
+            btnsEl.forEach(function (e) {
+                e.style.pointerEvents = "none";
+            })
             // player with most cards in deck wins
             if (pDeck.length > cDeck.length) {
                 winMsgEl.innerHTML = `DEFEAT! <br> Computer wins!`;
@@ -245,7 +246,7 @@ function getWinner() {
             else if (cDeck.length > pDeck.length) {
                 winMsgEl.innerHTML = `VICTORY! <br> You win! `;
                 winMsgContainer.style.display = "inline-block";
-                winMsgContainer.style.background = "linear-gradient(rgb(3, 206, 131) 0%,rgb(4, 158, 4)150%);";
+                winMsgContainer.style.background = "linear-gradient(rgb(3, 206, 131) 0%,rgb(4, 158, 4) 150%)";
             }
             else {
                 winMsginnerHTML = `You just did the impossible. You tied in a game of War! Congrats!`;
@@ -276,6 +277,7 @@ function warTime() {
         // reset warCards
         warCards = 0;
     }
+    warMsgEl.innerHTML = `Time for WAR! Play ${4 - warCards} cards.`
     render();
     getWinner();
 }
@@ -347,7 +349,7 @@ shuffleBtnEl.addEventListener("click", shufflePDeck);
 
 
 //Play again button
-// pops up after game is over
+playAgainBtnEl.addEventListener("click", init)
 
 // Computer trash talk
 // Speech bubble sometimes comes out 

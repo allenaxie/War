@@ -35,7 +35,7 @@ header {
 
 .title {
   font-family: Marcellus;
-  color: rgb(218, 165, 32);
+  color: rgb(248, 185, 113);
   font-size: 40px;
   margin-left: 10px;
   margin-top: 0px;
@@ -45,7 +45,8 @@ header {
   height: 55px;
   text-align: center;
   padding: 3px;
-  border-color: rgb(218, 165, 32);
+  border-color: rgb(248, 185, 113);
+  
 }
 
 .gameScreenTitle {
@@ -222,7 +223,7 @@ header {
   padding: 8px;
   position: absolute;
   text-align: center;
-  bottom: 200px;
+  bottom: 400px;
   left: 200px;
 }
 
@@ -232,7 +233,7 @@ header {
   width: 200px;
   position: absolute;
   top: 300px;
-  right: 200px;
+  right: 400px;
   border: groove;
   font-size: 20px;
   display: none;
@@ -265,3 +266,4 @@ footer {
   margin-bottom: 25px;
   font-family: Marcellus;
 }
+
