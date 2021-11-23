@@ -1,22 +1,7 @@
 /* War
-
-Setup: Deck of 52 cards -> 26 cards to player, 26 cards to computer.
-
-Render: 
-- player clicks "deck" to play button: 
-    -> player plays card on pile then computer plays card on pile-> 
-    -> side with larger card adds all the cards from pile into their deck 
-    -> If same card rank, each side places 3 cards face down and 4th card face up
-    -> side with larger card adds all the cards from pile into their deck 
-
-- Each turn, player may click "shuffle" button or "play card" button
--> repeat until player wins all the cards or at round 300, 
--> sudden death: winner of next round wins
-
-
-
 Tasks:
 - rounds remaining : max 120
+- Add sounds
 - Title screen
     - Rules
     - Settings
@@ -232,7 +217,6 @@ function getWinner() {
         warMsgEl.style.display = "inline-block";
     }
 
-
     // Check for winner of game
     // If player’s deck or computer’s deck is empty, display winner
     if (pDeck.length === 0) {
@@ -251,7 +235,26 @@ function getWinner() {
         // winner of next round wins the game!
         roundsRemainEl.style.display = "inline-block"
         roundsRemainEl.innerHTML = `<span>Rounds remaining: </span> <br><br> ${120 - round}`
+        if (round === 120) {
+            // player with most cards in deck wins
+            if (pDeck.length > cDeck.length) {
+                winMsgEl.innerHTML = `DEFEAT! <br> Computer wins!`;
+                winMsgContainer.style.display = "inline-block";
+                winMsgContainer.style.background = "linear-gradient(rgb(236, 49, 49) 0%,rgb(250, 115, 25) 150%)";
+            }
+            else if (cDeck.length > pDeck.length) {
+                winMsgEl.innerHTML = `VICTORY! <br> You win! `;
+                winMsgContainer.style.display = "inline-block";
+                winMsgContainer.style.background = "linear-gradient(rgb(3, 206, 131) 0%,rgb(4, 158, 4)150%);";
+            }
+            else {
+                winMsginnerHTML = `You just did the impossible. You tied in a game of War! Congrats!`;
+                winMsgContainer.style.display = "inline-block";
+                winMsgContainer.style.background = "linear-gradient(90deg,#0162c8,#55e7fc);";  
+            }
+        }
     }
+
 };
 
 function warTime() {
@@ -299,13 +302,11 @@ function shufflePDeck() {
 
 //////////////////////////////    Event Listeners    ////////////////////////////
 
-
-
-
 //Play button
 playBtnEl.addEventListener("click", function () {
     if (pNameInputEl.value) {
         player.name = pNameInputEl.value;
+        document.querySelector("footer").style.display = "none";
         document.querySelector(".pName").innerText = player.name
         $("header").fadeOut();
         $(".homeScreen").fadeOut();
@@ -315,7 +316,6 @@ playBtnEl.addEventListener("click", function () {
         },350);
     }
 })
-
 // Home Rules button
 homeRulesBtnEl.addEventListener("click",function() {
     rulesMsgEl.style.display = "inline-block";
@@ -328,7 +328,6 @@ gameRulesBtnEl.addEventListener("click",function() {
 rulesOKBtnEl.addEventListener("click",function () {
     rulesMsgEl.style.display = "none";
 })
-
 // Play card button
 pCardBtnEl.addEventListener("click", function (e) {
     // if warStatus = false, normal click
@@ -339,12 +338,10 @@ pDeckEl.addEventListener("click", function () {
     // if warStatus = false, normal click
     return (!warStatus) ? handleMove() : warTime();
 });
-
-
 // Shuffle deck button
 shuffleBtnEl.addEventListener("click", shufflePDeck);
 
-// Player has the option to shuffle their deck only once per turn
+
 
 // Settings button
 
