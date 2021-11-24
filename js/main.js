@@ -1,8 +1,5 @@
 /* War
 Tasks:
-- Add sounds
-    - deal card
-    - shuffle deck
 - Title screen
     - Settings
 - settings 
@@ -14,6 +11,7 @@ Tasks:
 - war message
     - display message for who wins WAR  "you won the battle!" or
     "you lost the battle!"
+- player icons and speech bubbles
 
 */
 
@@ -100,6 +98,15 @@ let shuffleBtnEl = document.querySelector(".shuffleBtn");
 let cDeckCountEl = document.querySelector(".cDeckCount");
 let pDeckCountEl = document.querySelector(".pDeckCount");
 let roundsRemainEl = document.querySelector(".roundsRemain");
+// Audio
+const audioLookUp = {
+    childYayAudioEl: document.getElementById("childYayAudio"),
+    dealCardAudioEl: document.getElementById("dealCardAudio"),
+    shuffleCardAudioEl: document.getElementById("shuffleCardAudio"),
+    laughAudioEl: document.getElementById("laughAudio"),
+    startWarEl: document.getElementById("startWar"),
+    warMusicEl: document.getElementById("warMusic"),
+}
 
 
 //////////////////////////////    Functions    ////////////////////////////
@@ -216,7 +223,18 @@ function getWinner() {
         // Change background
 
         // Sound
-
+        if (warCards === 0) {
+            audioLookUp.startWarEl.play();
+            btnsEl.forEach(function (e) {
+                e.style.pointerEvents= "none";
+            })
+            setTimeout(function() {
+                audioLookUp.warMusicEl.play();
+                btnsEl.forEach(function (e) {
+                    e.style.pointerEvents = "auto";
+                })
+            },2000);
+        }
         // display War time message: Play 4 more cards
         warMsgEl.style.display = "inline-block";
     }
@@ -228,12 +246,14 @@ function getWinner() {
         winMsgEl.innerHTML = `DEFEAT! <br> Computer wins!`;
         winMsgContainer.style.display = "inline-block";
         winMsgContainer.style.background = "linear-gradient(rgb(236, 49, 49) 0%,rgb(250, 115, 25) 150%)";
+        audioLookUp.laughAudioEl.play();
     }
     else if (cDeck.length === 0) {
         // player wins!
         winMsgEl.innerHTML = `VICTORY! <br> You win! `;
         winMsgContainer.style.display = "inline-block";
         winMsgContainer.style.background = "linear-gradient(rgb(3, 206, 131) 0%,rgb(4, 158, 4)150%);";
+        audioLookUp.childYayAudioEl.play();
     }
     else if (round > 110) {
         // winner of next round wins the game!
@@ -248,16 +268,19 @@ function getWinner() {
                 winMsgEl.innerHTML = `DEFEAT! <br> Computer has more cards in their deck!`;
                 winMsgContainer.style.display = "inline-block";
                 winMsgContainer.style.background = "linear-gradient(rgb(236, 49, 49) 0%,rgb(250, 115, 25) 150%)";
+                audioLookUp.laughAudioEl.play();
             }
             else if (pDeck.length > cDeck.length) {
                 winMsgEl.innerHTML = `VICTORY! <br> You have more cards in your card!`;
                 winMsgContainer.style.display = "inline-block";
                 winMsgContainer.style.background = "linear-gradient(rgb(3, 206, 131) 0%,rgb(4, 158, 4) 150%)";
+                audioLookUp.childYayAudioEl.play();
             }
             else {
-                winMsginnerHTML = `TIE GAME! You're not a winner or a loser.`;
+                winMsginnerHTML = `TIE GAME! You're not a winner nor a loser.`;
                 winMsgContainer.style.display = "inline-block";
                 winMsgContainer.style.background = "linear-gradient(90deg,#0162c8,#55e7fc);";  
+                audioLookUp.laughAudioEl.play();
             }
         }
     }
@@ -283,8 +306,9 @@ function warTime() {
         // reset warCards
         warCards = 0;
         warMsgEl.style.display = "none";
+        document.getElementById("warMusic").pause();
     }
-    warMsgEl.innerHTML = `Time for WAR! Play ${4 - warCards} cards.`
+    warMsgEl.innerHTML = `Time for WAR! Play ${4 - warCards} cards.`;
     render();
     getWinner();
 }
@@ -339,7 +363,7 @@ rulesOKBtnEl.addEventListener("click",function () {
 // Play card button
 pCardBtnEl.addEventListener("click", function (e) {
     // play deal card sound
-    document.getElementById("dealCardAudio").play();
+    audioLookUp.dealCardAudioEl.play();
     // if warStatus = false, normal click
     if (!warStatus) {
         handleMove();
@@ -351,7 +375,7 @@ pCardBtnEl.addEventListener("click", function (e) {
     pCardBtnEl.disabled = true;
     setTimeout(function () {
         pCardBtnEl.disabled = false;
-    }, 800);
+    }, 600);
 });
 // Click player deck to also play next card
 pDeckEl.addEventListener("click", function () {
@@ -362,7 +386,7 @@ pDeckEl.addEventListener("click", function () {
 shuffleBtnEl.addEventListener("click", function () {
     if (shuffled === 1) {
         // sound effect
-        document.getElementById("shuffleCardAudio").play();
+        audioLookUp.shuffleCardAudioEl.play();
         shuffled *= -1;
         shuffleBtnEl.disabled = true;
         shufflePDeck;
