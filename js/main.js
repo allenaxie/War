@@ -2,6 +2,7 @@
 Tasks:
 - settings 
     - Able to change background color theme
+        - add picture and preview of default theme
     - Able to set number of rounds before a winner is declared (30, 50, unlimited)
 - change background when its time for "War"
     - add sound effect for war
@@ -9,6 +10,9 @@ Tasks:
     - display message for who wins WAR  "you won the battle!" or
     "you lost the battle!"
 - player icons and speech bubbles
+- System log chat box
+    - logs history of who wins a WAR battle
+    - user can type in chat box and computer responds with a random line
 
 */
 
@@ -68,6 +72,7 @@ cHand, pDeck, cDeck, warStatus, warCards, roundsRemain
 
 
 //////////////////////////////    Cached element references    ////////////////////////////
+let bodyEl = document.querySelector("body");
 // Field
 let pHandEl = document.querySelector(".pHand");
 let cHandEl = document.querySelector(".cHand");
@@ -109,6 +114,17 @@ const audioLookUp = {
     laughAudioEl: document.getElementById("laughAudio"),
     startWarEl: document.getElementById("startWar"),
     warMusicEl: document.getElementById("warMusic"),
+}
+// Background themes
+const bgThemes = {
+    aquaInferno: {
+        bgAI1: null,
+        bgAI2: null,
+    },
+    blackYellow: {
+        bgBY1: document.getElementById("bgBY1"),
+        bgBY2: document.getElementById("bgBY2"),
+    }
 }
 
 //////////////////////////////    Functions    ////////////////////////////
@@ -450,6 +466,27 @@ settingsOkBtnEl.addEventListener("click",function () {
 
 //Play again button
 playAgainBtnEl.addEventListener("click", init)
+
+// Background themes
+
+
+
+
+bgThemes["blackYellow"]["bgBY1"].addEventListener("click", function () {
+    // add class to body
+    bodyEl.classList.add("blackYellowBody");
+    // add class to buttons
+    playBtnEl.classList.add("blackYellowBtns");
+    homeRulesBtnEl.classList.add("blackYellowBtns");
+    homeSettingsBtnEl.classList.add("blackYellowBtns");
+})
+bgThemes["blackYellow"]["bgBY1"].addEventListener("mouseenter", function() {
+    bgThemes["blackYellow"]["bgBY2"].style.display = "inline-block";
+})
+bgThemes["blackYellow"]["bgBY1"].addEventListener("mouseleave", function() {
+    bgThemes["blackYellow"]["bgBY2"].style.display = "none";
+})
+
 
 // Computer trash talk
 // Speech bubble sometimes comes out 
