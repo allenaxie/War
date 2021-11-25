@@ -1,9 +1,6 @@
 /* War
 Tasks:
-- Title screen
-    - Settings
 - settings 
-    - different backgrounds
     - Able to change background color theme
     - Able to set number of rounds before a winner is declared (30, 50, unlimited)
 - change background when its time for "War"
@@ -84,15 +81,21 @@ let pCardBtnEl = document.querySelector(".pCardBtn");
 let infoBtnEl = document.querySelector(".infoBtn");
 let homeRulesBtnEl = document.querySelector(".homeRulesBtn")
 let gameRulesBtnEl = document.querySelector(".gameRulesBtn")
-let rulesOKBtnEl = document.getElementById("ok");
+let homeSettingsBtnEl = document.querySelector(".homeSettingsBtn");
+let gameSettingsBtnEl = document.querySelector(".gameSettingsBtn");
+let rulesOKBtnEl = document.getElementById("rulesOk");
+let settingsOkBtnEl = document.getElementById("settingsOk");
 let pNameInputEl = document.querySelector(".pNameInput");
 let playAgainBtnEl = document.querySelector(".playAgainBtn");
 let btnsEl = document.querySelectorAll(".btns");
+let soundOnEl = document.querySelector(".soundOn");
+let soundOffEl = document.querySelector(".soundOff");
 // Messages
 let roundEl = document.querySelector(".round");
 let warMsgEl = document.querySelector(".warMsg");
 let winMsgEl = document.querySelector(".winMsg");
 let winMsgContainer = document.querySelector(".winMsgContainer");
+let settingsContainerEl = document.querySelector(".settingsContainer");
 let rulesMsgEl = document.querySelector(".rulesMsg");
 let shuffleBtnEl = document.querySelector(".shuffleBtn");
 let cDeckCountEl = document.querySelector(".cDeckCount");
@@ -107,7 +110,6 @@ const audioLookUp = {
     startWarEl: document.getElementById("startWar"),
     warMusicEl: document.getElementById("warMusic"),
 }
-
 
 //////////////////////////////    Functions    ////////////////////////////
 
@@ -141,6 +143,9 @@ function init() {
     warCards = 0;
     player = {};
     shuffled = 1;
+    Object.values(audioLookUp).forEach(function(audio){
+        audio.volume = 0.65;
+    })
     render();
 };
 
@@ -284,7 +289,6 @@ function getWinner() {
             }
         }
     }
-
 };
 
 function warTime() {
@@ -351,14 +355,24 @@ playBtnEl.addEventListener("click", function () {
 // Home Rules button
 homeRulesBtnEl.addEventListener("click",function() {
     rulesMsgEl.style.display = "inline-block";
+    homeSettingsBtnEl.style.pointerEvents = "none";
+    playAgainBtnEl.style.pointerEvents = "none";
 })
 // Game Rules button
 gameRulesBtnEl.addEventListener("click",function() {
     rulesMsgEl.style.display = "inline-block";
+    btnsEl.forEach(function(btn) {
+        btn.style.pointerEvents = "none";
+    })
 })
 // Rules OK button
 rulesOKBtnEl.addEventListener("click",function () {
     rulesMsgEl.style.display = "none";
+    homeSettingsBtnEl.style.pointerEvents = "auto";
+    playAgainBtnEl.style.pointerEvents = "auto";
+    btnsEl.forEach(function(btn) {
+        btn.style.pointerEvents = "auto";
+    })
 })
 // Play card button
 pCardBtnEl.addEventListener("click", function (e) {
@@ -396,7 +410,43 @@ shuffleBtnEl.addEventListener("click", function () {
 
 
 // Settings button
+homeSettingsBtnEl.addEventListener("click", function () {
+    settingsContainerEl.style.display = "inline-block";
+    homeRulesBtnEl.style.pointerEvents = "none";
+    playBtnEl.style.pointerEvents = "none";
+})
+gameSettingsBtnEl.addEventListener("click", function () {
+    settingsContainerEl.style.display = "inline-block";
+    btnsEl.forEach(function(btn) {
+        btn.style.pointerEvents = "none";
+    })
+})
+//Sound settings
+soundOnEl.addEventListener("click", function () {
+    Object.values(audioLookUp).forEach(function(audio){
+        audio.volume = 0;
+    })
+    soundOnEl.style.display = "none";
+    soundOffEl.style.display = "inline-block";
 
+})
+soundOffEl.addEventListener("click", function () {
+    Object.values(audioLookUp).forEach(function(audio){
+        audio.volume = 0.65;
+    })
+    soundOffEl.style.display = "none";
+    soundOnEl.style.display = "inline-block";
+})
+
+// Settings ok button 
+settingsOkBtnEl.addEventListener("click",function () {
+    settingsContainerEl.style.display = "none";
+    btnsEl.forEach(function(btn) {
+        btn.style.pointerEvents = "auto";
+    })
+    homeRulesBtnEl.style.pointerEvents = "auto";
+    playBtnEl.style.pointerEvents = "auto";
+})
 
 //Play again button
 playAgainBtnEl.addEventListener("click", init)

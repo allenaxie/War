@@ -147,6 +147,7 @@ header {
   padding: 20px;
   border: groove;
   display: none;
+  z-index: 2;
 }
 .rulesMsg > #howTo {
   color:gold;
@@ -160,7 +161,7 @@ header {
   text-align: left;
   margin-right: 300px; 
 }
-#ok {
+#rulesOk {
   text-align: center;
   font-size: 22px;
   padding: 5px;
@@ -238,14 +239,50 @@ header {
   font-size: 20px;
   display: none;
 }
+.winMsg > button:hover {
+  background: linear-gradient(180deg,#40606d 0%, #0e7291 120%);
+}
+
+.settingsContainer {
+  color: white;
+  width: 400px;
+  background: #7c9ca5;
+  position: absolute;
+  top: 50px;
+  text-align: center;
+  padding: 20px;
+  border: groove;
+  display: none;
+  z-index: 2;
+}
+
+.soundSettings {
+  display: flex;
+}
+.soundOn,.soundOff {
+  width: 50px;
+  cursor: pointer;
+  margin-left: 100px;
+}
+.soundOff {
+  display: none;
+}
+
+#settingsOk {
+  text-align: center;
+  font-size: 22px;
+  padding: 5px;
+  border: double;
+  margin-left: 170px;
+  margin-top: 100px;
+  cursor: pointer;
+}
+
 .playAgainBtn {
   margin-top: 30px;
   text-align: center;
   background: linear-gradient(180deg,#7f9aa5 0%, #065e79 100%);
   cursor: pointer;
-}
-.winMsg > button:hover {
-  background: linear-gradient(180deg,#40606d 0%, #0e7291 120%);
 }
 
 .roundsRemain {
