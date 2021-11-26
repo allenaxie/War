@@ -24,7 +24,7 @@ header {
 
 .gameScreen {
   display: none;
-  background: linear-gradient(#293d43 0%, #3c5964 120%);
+  background: #003049;
   padding-left: 20px;
   padding-bottom: 10px;
   width: 100%;
@@ -176,10 +176,6 @@ header {
   margin: 10px;
 }
 
-.btns {
-  margin: 20px;
-}
-
 .computerHP {
   display: flex;
 }
@@ -225,7 +221,7 @@ header {
   position: absolute;
   text-align: center;
   bottom: 400px;
-  left: 200px;
+  left: 150px;
 }
 
 .winMsgContainer {
@@ -245,10 +241,11 @@ header {
 
 .settingsContainer {
   color: white;
-  width: 600px;
+  width: 510px;
   background: #7c9ca5;
   position: absolute;
   top: 50px;
+  margin-left: -90px;
   text-align: center;
   padding: 20px;
   border: groove;
@@ -262,7 +259,7 @@ header {
   display: flex;
   text-align: center;
   padding: 5px;
-  margin-left: 160px;
+  margin-left: 200px;
   margin-bottom: 40px;
 }
 .soundSettings {
@@ -273,10 +270,26 @@ header {
 .soundOn,.soundOff {
   width: 50px;
   cursor: pointer;
-  margin-left: 150px;
+  margin-left: 230px;
   position: absolute;
 }
 .soundOff {
+  display: none;
+}
+
+.warMusicSettings {
+  display: flex;
+  color: gold;
+  font-size: 20px;
+  margin-top: 40px;
+}
+.warMusicOn,.warMusicOff {
+  width: 50px;
+  cursor: pointer;
+  margin-left: 230px;
+  position: absolute;
+}
+.warMusicOff {
   display: none;
 }
 
@@ -285,7 +298,7 @@ header {
   font-size: 22px;
   padding: 5px;
   border: double;
-  margin-left: 170px;
+  margin-left: 230px;
   margin-top: 50px;
   cursor: pointer;
   display: flex;
@@ -311,6 +324,23 @@ header {
   border: groove;
   font-size: 20px;
   display: none;
+}
+
+.btns {
+  text-align: center;
+  background: linear-gradient(180deg,#219ebc 0%, #023047 120%);
+  padding: 10px;
+  font-size: 20px;
+  cursor: pointer;
+  margin: 15px;
+  margin-bottom: 30px;
+}
+.btns:hover {
+  background: linear-gradient(180deg,#e87e0d 0%,#a9420f 130%);
+}
+
+.cName {
+  margin-bottom: 10px;
 }
 
 footer {
@@ -339,7 +369,7 @@ footer {
   color: black;
 }
 .bgFOContainer {
-  margin-top: 30px;
+  margin-top: 10px;
   text-align: left;
 }
 #bgFO1 {
@@ -362,7 +392,7 @@ footer {
   color: #FEE715FF;
 }
 .blackYellowBtns {
-  background:#FEE715FF;
+  background:rgb(233, 218, 12);
   color: black;
 }
 .bgBlackYellowContainer {

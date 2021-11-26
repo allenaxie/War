@@ -95,6 +95,8 @@ let playAgainBtnEl = document.querySelector(".playAgainBtn");
 let btnsEl = document.querySelectorAll(".btns");
 let soundOnEl = document.querySelector(".soundOn");
 let soundOffEl = document.querySelector(".soundOff");
+let warMusicOnEl = document.querySelector(".warMusicOn");
+let warMusicOffEl = document.querySelector(".warMusicOff");
 // Messages
 let roundEl = document.querySelector(".round");
 let warMsgEl = document.querySelector(".warMsg");
@@ -438,6 +440,7 @@ gameSettingsBtnEl.addEventListener("click", function () {
     })
 })
 //Sound settings
+//Master sound 
 soundOnEl.addEventListener("click", function () {
     Object.values(audioLookUp).forEach(function (audio) {
         audio.volume = 0;
@@ -452,6 +455,19 @@ soundOffEl.addEventListener("click", function () {
     })
     soundOffEl.style.display = "none";
     soundOnEl.style.display = "inline-block";
+})
+// War music
+warMusicOnEl.addEventListener("click", function () {
+    audioLookUp.startWarEl.volume = 0;
+    audioLookUp.warMusicEl.volume = 0;
+    warMusicOnEl.style.display = "none";
+    warMusicOffEl.style.display = "inline-block";
+})
+warMusicOffEl.addEventListener("click", function () {
+    audioLookUp.startWarEl.volume = 0.65;
+    audioLookUp.warMusicEl.volume = 0.65;
+    warMusicOnEl.style.display = "inline-block";
+    warMusicOffEl.style.display = "none";
 })
 
 // Settings ok button 
