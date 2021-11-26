@@ -66,9 +66,9 @@ function getNewShuffledDeck() {
 
 //////////////////////////////    App's state (variables)    ////////////////////////////
 
-let player,round, winner, pPile, cPile, pHand, 
-cHand, pDeck, cDeck, warStatus, warCards, roundsRemain
-,shuffled;
+let player, round, winner, pPile, cPile, pHand,
+    cHand, pDeck, cDeck, warStatus, warCards, roundsRemain
+    , shuffled;
 
 
 //////////////////////////////    Cached element references    ////////////////////////////
@@ -117,9 +117,9 @@ const audioLookUp = {
 }
 // Background themes
 const bgThemes = {
-    aquaInferno: {
-        bgAI1: null,
-        bgAI2: null,
+    fieryOcean: {
+        bgFO1: document.getElementById("bgFO1"),
+        bgFO2: document.getElementById("bgFO2"),
     },
     blackYellow: {
         bgBY1: document.getElementById("bgBY1"),
@@ -159,7 +159,7 @@ function init() {
     warCards = 0;
     player = {};
     shuffled = 1;
-    Object.values(audioLookUp).forEach(function(audio){
+    Object.values(audioLookUp).forEach(function (audio) {
         audio.volume = 0.65;
     })
     render();
@@ -247,14 +247,14 @@ function getWinner() {
         if (warCards === 0) {
             audioLookUp.startWarEl.play();
             btnsEl.forEach(function (e) {
-                e.style.pointerEvents= "none";
+                e.style.pointerEvents = "none";
             })
-            setTimeout(function() {
+            setTimeout(function () {
                 audioLookUp.warMusicEl.play();
                 btnsEl.forEach(function (e) {
                     e.style.pointerEvents = "auto";
                 })
-            },2000);
+            }, 2000);
         }
         // display War time message: Play 4 more cards
         warMsgEl.style.display = "inline-block";
@@ -300,7 +300,7 @@ function getWinner() {
             else {
                 winMsginnerHTML = `TIE GAME! You're not a winner nor a loser.`;
                 winMsgContainer.style.display = "inline-block";
-                winMsgContainer.style.background = "linear-gradient(90deg,#0162c8,#55e7fc);";  
+                winMsgContainer.style.background = "linear-gradient(90deg,#0162c8,#55e7fc);";
                 audioLookUp.laughAudioEl.play();
             }
         }
@@ -344,7 +344,7 @@ function shufflePDeck() {
         tempDeck.push(pDeck.splice(randomNum, 1)[0]);
     };
     // copy new shuffled deck back to player deck
-    pDeck = tempDeck.map(function(card) {
+    pDeck = tempDeck.map(function (card) {
         return card;
     });
     return pDeck;
@@ -363,30 +363,30 @@ playBtnEl.addEventListener("click", function () {
         $("header").fadeOut();
         $(".homeScreen").fadeOut();
         // Delay game screen fade in
-        setTimeout(function() {
+        setTimeout(function () {
             $(".gameScreen").fadeIn();
-        },350);
+        }, 350);
     }
 })
 // Home Rules button
-homeRulesBtnEl.addEventListener("click",function() {
+homeRulesBtnEl.addEventListener("click", function () {
     rulesMsgEl.style.display = "inline-block";
     homeSettingsBtnEl.style.pointerEvents = "none";
     playAgainBtnEl.style.pointerEvents = "none";
 })
 // Game Rules button
-gameRulesBtnEl.addEventListener("click",function() {
+gameRulesBtnEl.addEventListener("click", function () {
     rulesMsgEl.style.display = "inline-block";
-    btnsEl.forEach(function(btn) {
+    btnsEl.forEach(function (btn) {
         btn.style.pointerEvents = "none";
     })
 })
 // Rules OK button
-rulesOKBtnEl.addEventListener("click",function () {
+rulesOKBtnEl.addEventListener("click", function () {
     rulesMsgEl.style.display = "none";
     homeSettingsBtnEl.style.pointerEvents = "auto";
     playAgainBtnEl.style.pointerEvents = "auto";
-    btnsEl.forEach(function(btn) {
+    btnsEl.forEach(function (btn) {
         btn.style.pointerEvents = "auto";
     })
 })
@@ -433,13 +433,13 @@ homeSettingsBtnEl.addEventListener("click", function () {
 })
 gameSettingsBtnEl.addEventListener("click", function () {
     settingsContainerEl.style.display = "inline-block";
-    btnsEl.forEach(function(btn) {
+    btnsEl.forEach(function (btn) {
         btn.style.pointerEvents = "none";
     })
 })
 //Sound settings
 soundOnEl.addEventListener("click", function () {
-    Object.values(audioLookUp).forEach(function(audio){
+    Object.values(audioLookUp).forEach(function (audio) {
         audio.volume = 0;
     })
     soundOnEl.style.display = "none";
@@ -447,7 +447,7 @@ soundOnEl.addEventListener("click", function () {
 
 })
 soundOffEl.addEventListener("click", function () {
-    Object.values(audioLookUp).forEach(function(audio){
+    Object.values(audioLookUp).forEach(function (audio) {
         audio.volume = 0.65;
     })
     soundOffEl.style.display = "none";
@@ -455,9 +455,9 @@ soundOffEl.addEventListener("click", function () {
 })
 
 // Settings ok button 
-settingsOkBtnEl.addEventListener("click",function () {
+settingsOkBtnEl.addEventListener("click", function () {
     settingsContainerEl.style.display = "none";
-    btnsEl.forEach(function(btn) {
+    btnsEl.forEach(function (btn) {
         btn.style.pointerEvents = "auto";
     })
     homeRulesBtnEl.style.pointerEvents = "auto";
@@ -467,23 +467,56 @@ settingsOkBtnEl.addEventListener("click",function () {
 //Play again button
 playAgainBtnEl.addEventListener("click", init)
 
-// Background themes
+//////// Background themes ////////
 
-
-
-
-bgThemes["blackYellow"]["bgBY1"].addEventListener("click", function () {
+// Fiery Ocean (default)
+bgThemes["fieryOcean"]["bgFO1"].addEventListener("click", function () {
+    // Remove existing theme
+    if (bodyEl.className !== "") {
+        bodyEl.className = "";
+        playBtnEl.className = "playBtn";
+        homeRulesBtnEl.className = "homeRulesBtn";
+        homeSettingsBtnEl.className = "homeSettingsBtn";
+    }
+    // Add new theme
     // add class to body
-    bodyEl.classList.add("blackYellowBody");
+    bodyEl.className = "fieryOceanBody";
+    // add class to buttons
+    playBtnEl.classList.add("fieryOceanBtns");
+    homeRulesBtnEl.classList.add("fieryOceanBtns");
+    homeSettingsBtnEl.classList.add("fieryOceanBtns");
+});
+// show preview when hover
+bgThemes["fieryOcean"]["bgFO1"].addEventListener("mouseenter", function () {
+    bgThemes["fieryOcean"]["bgFO2"].style.display = "inline-block";
+});
+bgThemes["fieryOcean"]["bgFO1"].addEventListener("mouseleave", function () {
+    bgThemes["fieryOcean"]["bgFO2"].style.display = "none";
+});
+
+
+// Black and yellow
+bgThemes["blackYellow"]["bgBY1"].addEventListener("click", function () {
+    // Remove old theme
+    if (bodyEl.id !== "") {
+        bodyEl.id = "";
+        playBtnEl.id = "";
+        homeRulesBtnEl.id = "";
+        homeSettingsBtnEl.id = "";
+    }
+    // Add new theme
+    // add class to body
+    bodyEl.className = "blackYellowBody";;
     // add class to buttons
     playBtnEl.classList.add("blackYellowBtns");
     homeRulesBtnEl.classList.add("blackYellowBtns");
     homeSettingsBtnEl.classList.add("blackYellowBtns");
 })
-bgThemes["blackYellow"]["bgBY1"].addEventListener("mouseenter", function() {
+// show preview on hover
+bgThemes["blackYellow"]["bgBY1"].addEventListener("mouseenter", function () {
     bgThemes["blackYellow"]["bgBY2"].style.display = "inline-block";
 })
-bgThemes["blackYellow"]["bgBY1"].addEventListener("mouseleave", function() {
+bgThemes["blackYellow"]["bgBY1"].addEventListener("mouseleave", function () {
     bgThemes["blackYellow"]["bgBY2"].style.display = "none";
 })
 

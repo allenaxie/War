@@ -103,7 +103,7 @@ header {
   margin-left: 150px;
   cursor: pointer;
 }
-.playBtn:hover,.homeRulesBtn:hover,.homeSettingsBtn:hover {
+.playBtn:hover,#homeRulesBtn:hover,#homeSettingsBtn:hover {
   background: linear-gradient(180deg,#e87e0d 0%,#a9420f 130%);
 }
 
@@ -245,7 +245,7 @@ header {
 
 .settingsContainer {
   color: white;
-  width: 400px;
+  width: 600px;
   background: #7c9ca5;
   position: absolute;
   top: 50px;
@@ -329,18 +329,39 @@ footer {
   color: gold;
 }
 
-/* aqua inferno (default) */
-.bgAIContainer {
+/* Fiery Ocean (default) */
+#fieryOceanBody {
+  background: linear-gradient(#065e79,#e25b17);
+  color: white;
+}
+#fieryOceanBtns {
+  background:linear-gradient(180deg,#3c5964 0%, #293d43 120%);
+  color: black;
+}
+.bgFOContainer {
   margin-top: 30px;
   text-align: left;
 }
+#bgFO1 {
+  width: 100px;
+  margin-left: 50px;
+  margin-top: 50px;
+  cursor: pointer;
+}
+#bgFO2 {
+  width: 170px;
+  margin-left: 20px;
+  display: none;
+}
+
+
 
 /* black and yellow */
-.blackYellowBody {
+#blackYellowBody {
   background: linear-gradient(#293d43,#101820FF);
   color: #FEE715FF;
 }
-.blackYellowBtns {
+#blackYellowBtns {
   background:#FEE715FF;
   color: black;
 }
@@ -351,10 +372,11 @@ footer {
 #bgBY1 {
   width: 100px;
   margin-left: 100px;
-  margin-top: 30px;
+  margin-top: 50px;
   cursor: pointer;
 }
 #bgBY2 {
-  width: 100px;
+  width: 170px;
+  margin-left: 20px;
   display: none;
 }
