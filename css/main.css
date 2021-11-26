@@ -330,11 +330,11 @@ footer {
 }
 
 /* Fiery Ocean (default) */
-#fieryOceanBody {
+.fieryOceanBody {
   background: linear-gradient(#065e79,#e25b17);
   color: white;
 }
-#fieryOceanBtns {
+.fieryOceanBtns {
   background:linear-gradient(180deg,#3c5964 0%, #293d43 120%);
   color: black;
 }
@@ -357,11 +357,11 @@ footer {
 
 
 /* black and yellow */
-#blackYellowBody {
+.blackYellowBody {
   background: linear-gradient(#293d43,#101820FF);
   color: #FEE715FF;
 }
-#blackYellowBtns {
+.blackYellowBtns {
   background:#FEE715FF;
   color: black;
 }

@@ -498,11 +498,11 @@ bgThemes["fieryOcean"]["bgFO1"].addEventListener("mouseleave", function () {
 // Black and yellow
 bgThemes["blackYellow"]["bgBY1"].addEventListener("click", function () {
     // Remove old theme
-    if (bodyEl.id !== "") {
-        bodyEl.id = "";
-        playBtnEl.id = "";
-        homeRulesBtnEl.id = "";
-        homeSettingsBtnEl.id = "";
+    if (bodyEl.className !== "") {
+        bodyEl.className = "";
+        playBtnEl.className = "playBtn";
+        homeRulesBtnEl.className = "homeRulesBtn";
+        homeSettingsBtnEl.className = "homeSettingsBtn";
     }
     // Add new theme
     // add class to body
