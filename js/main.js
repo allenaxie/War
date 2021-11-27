@@ -411,6 +411,8 @@ pCardBtnEl.addEventListener("click", function (e) {
 });
 // Click player deck to also play next card
 pDeckEl.addEventListener("click", function () {
+    // play deal card sound
+    audioLookUp.dealCardAudioEl.play();
     // if warStatus = false, normal click
     return (!warStatus) ? handleMove() : warTime();
 });
