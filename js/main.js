@@ -68,7 +68,7 @@ function getNewShuffledDeck() {
 
 let player, round, winner, pPile, cPile, pHand,
     cHand, pDeck, cDeck, warStatus, warCards, roundsRemain
-    , shuffled;
+    , shuffled, soundStatus;
 
 
 //////////////////////////////    Cached element references    ////////////////////////////
@@ -161,6 +161,7 @@ function init() {
     warCards = 0;
     player = {};
     shuffled = 1;
+    soundStatus = true;
     Object.values(audioLookUp).forEach(function (audio) {
         audio.volume = 0.65;
     })
@@ -403,11 +404,11 @@ pCardBtnEl.addEventListener("click", function (e) {
     else {
         warTime();
     }
-    // 1 second per click
+    // .5 second per click
     pCardBtnEl.disabled = true;
     setTimeout(function () {
         pCardBtnEl.disabled = false;
-    }, 600);
+    }, 500);
 });
 // Click player deck to also play next card
 pDeckEl.addEventListener("click", function () {
@@ -447,6 +448,7 @@ soundOnEl.addEventListener("click", function () {
     Object.values(audioLookUp).forEach(function (audio) {
         audio.volume = 0;
     })
+    soundStatus = false;
     soundOnEl.style.display = "none";
     soundOffEl.style.display = "inline-block";
 
@@ -455,6 +457,7 @@ soundOffEl.addEventListener("click", function () {
     Object.values(audioLookUp).forEach(function (audio) {
         audio.volume = 0.65;
     })
+    soundStatus = true;
     soundOffEl.style.display = "none";
     soundOnEl.style.display = "inline-block";
 })
@@ -466,8 +469,10 @@ warMusicOnEl.addEventListener("click", function () {
     warMusicOffEl.style.display = "inline-block";
 })
 warMusicOffEl.addEventListener("click", function () {
-    audioLookUp.startWarEl.volume = 0.65;
-    audioLookUp.warMusicEl.volume = 0.65;
+    if (soundStatus === true) {
+        audioLookUp.startWarEl.volume = 0.65;
+        audioLookUp.warMusicEl.volume = 0.65;
+    }
     warMusicOnEl.style.display = "inline-block";
     warMusicOffEl.style.display = "none";
 })

@@ -330,7 +330,7 @@ header {
   text-align: center;
   background: linear-gradient(180deg,#219ebc 0%, #023047 120%);
   padding: 10px;
-  font-size: 20px;
+  font-size: 2ch;
   cursor: pointer;
   margin: 15px;
   margin-bottom: 30px;
