@@ -160,11 +160,13 @@ function init() {
     roundsRemainEl.style.display = "none";
     warCards = 0;
     player = {};
-    shuffled = 1;
+    shuffled = 0;
     soundStatus = true;
     Object.values(audioLookUp).forEach(function (audio) {
-        audio.volume = 0.65;
+        audio.volume = 0.50;
     })
+    audioLookUp.startWarEl.volume = 0;
+    audioLookUp.warMusicEl.volume = 0;
     render();
 };
 
@@ -204,9 +206,6 @@ function handleMove() {
     }
     // Increment round number
     round++;
-    // Reset shuffle status
-    shuffled = 1;
-    shuffleBtnEl.disabled = false;
     // show card on DOM
     render();
     // Check for winner
@@ -331,12 +330,15 @@ function warTime() {
         warMsgEl.style.display = "none";
         document.getElementById("warMusic").pause();
     }
-    warMsgEl.innerHTML = `Time for WAR! Play ${4 - warCards} cards.`;
+    warMsgEl.innerHTML = `Time for WAR! Play ${4 - warCards} more cards.`;
     render();
     getWinner();
 }
 
 function shufflePDeck() {
+    if (shuffled === 3) {
+        shuffleBtnEl.disabled = true;
+    }
     // Create temporary deck
     let tempDeck = [];
     // while pDeck.length is true
@@ -351,7 +353,7 @@ function shufflePDeck() {
         return card;
     });
     return pDeck;
-    // disable after one use per round 
+    
 }
 
 
@@ -417,18 +419,25 @@ pDeckEl.addEventListener("click", function () {
     // if warStatus = false, normal click
     return (!warStatus) ? handleMove() : warTime();
 });
+
 // Shuffle deck button
 shuffleBtnEl.addEventListener("click", function () {
-    if (shuffled === 1) {
+    if (shuffled < 3) {
         // sound effect
         audioLookUp.shuffleCardAudioEl.play();
-        shuffled *= -1;
-        shuffleBtnEl.disabled = true;
+        shuffled ++;
+        shuffleBtnEl.innerHTML = `Shuffle Deck (${3 - shuffled})`;
         shufflePDeck;
+        // wait .8 sec before click again
+        shuffleBtnEl.disabled = true;
+        setTimeout(function () {
+            shuffleBtnEl.disabled = false;
+        },1200);
+        console.log(shuffled);
     }
+  
+   
 });
-
-
 
 // Settings button
 homeSettingsBtnEl.addEventListener("click", function () {
@@ -455,7 +464,7 @@ soundOnEl.addEventListener("click", function () {
 })
 soundOffEl.addEventListener("click", function () {
     Object.values(audioLookUp).forEach(function (audio) {
-        audio.volume = 0.65;
+        audio.volume = 0.50;
     })
     soundStatus = true;
     soundOffEl.style.display = "none";
@@ -470,8 +479,8 @@ warMusicOnEl.addEventListener("click", function () {
 })
 warMusicOffEl.addEventListener("click", function () {
     if (soundStatus === true) {
-        audioLookUp.startWarEl.volume = 0.65;
-        audioLookUp.warMusicEl.volume = 0.65;
+        audioLookUp.startWarEl.volume = 0.50;
+        audioLookUp.warMusicEl.volume = 0.50;
     }
     warMusicOnEl.style.display = "inline-block";
     warMusicOffEl.style.display = "none";
