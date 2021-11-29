@@ -1,23 +1,3 @@
-/* War
-Tasks:
-- settings 
-    - Able to change background color theme
-        - add picture and preview of default theme
-    - Able to set number of rounds before a winner is declared (30, 50, unlimited)
-- change background when its time for "War"
-    - add sound effect for war
-- war message
-    - display message for who wins WAR  "you won the battle!" or
-    "you lost the battle!"
-- player icons and speech bubbles
-- System log chat box
-    - logs history of who wins a WAR battle
-    - user can type in chat box and computer responds with a random line
-
-*/
-
-
-
 //////////////////////////////    Constants    ////////////////////////////
 
 // Constants
@@ -49,7 +29,6 @@ function buildMasterDeck() {
     return deck;
 }
 
-
 function getNewShuffledDeck() {
     // Create a copy of the masterDeck (leave masterDeck untouched!)
     const tempDeck = [...masterDeck];
@@ -63,13 +42,11 @@ function getNewShuffledDeck() {
     return newShuffledDeck;
 }
 
-
 //////////////////////////////    App's state (variables)    ////////////////////////////
 
 let player, round, winner, pPile, cPile, pHand,
     cHand, pDeck, cDeck, warStatus, warCards, roundsRemain
     , shuffled, soundStatus;
-
 
 //////////////////////////////    Cached element references    ////////////////////////////
 let bodyEl = document.querySelector("body");
@@ -163,7 +140,7 @@ function init() {
     shuffled = 0;
     soundStatus = true;
     Object.values(audioLookUp).forEach(function (audio) {
-        audio.volume = 0.50;
+        audio.volume = 0.35;
     })
     audioLookUp.startWarEl.volume = 0;
     audioLookUp.warMusicEl.volume = 0;
@@ -204,6 +181,10 @@ function handleMove() {
         pHand.unshift(pDeck.pop());
         cHand.unshift(cDeck.pop());
     }
+    // Hide war message after battle
+    if (warStatus === false) {
+        warMsgEl.style.display = "none";
+    }
     // Increment round number
     round++;
     // show card on DOM
@@ -211,7 +192,6 @@ function handleMove() {
     // Check for winner
     getWinner();
 };
-
 
 function getWinner() {
     // Check for winner of each round
@@ -243,8 +223,6 @@ function getWinner() {
     else {
         // War
         warStatus = true;
-        // Change background
-
         // Sound
         if (warCards === 0) {
             audioLookUp.startWarEl.play();
@@ -256,9 +234,10 @@ function getWinner() {
                 btnsEl.forEach(function (e) {
                     e.style.pointerEvents = "auto";
                 })
-            }, 2000);
+            }, 1500);
         }
         // display War time message: Play 4 more cards
+        warMsgEl.innerHTML = `Time for WAR! Play ${4 - warCards} more cards.`;
         warMsgEl.style.display = "inline-block";
     }
 
@@ -275,7 +254,7 @@ function getWinner() {
         // player wins!
         winMsgEl.innerHTML = `VICTORY! <br> You win! `;
         winMsgContainer.style.display = "inline-block";
-        winMsgContainer.style.background = "linear-gradient(rgb(3, 206, 131) 0%,rgb(4, 158, 4)150%);";
+        winMsgContainer.style.background = "linear-gradient(rgb(3, 206, 131) 0%,rgb(4, 158, 4) 150%)";
         audioLookUp.childYayAudioEl.play();
     }
     else if (round > 110) {
@@ -294,7 +273,7 @@ function getWinner() {
                 audioLookUp.laughAudioEl.play();
             }
             else if (pDeck.length > cDeck.length) {
-                winMsgEl.innerHTML = `VICTORY! <br> You have more cards in your card!`;
+                winMsgEl.innerHTML = `VICTORY! <br> You have more cards in your deck!`;
                 winMsgContainer.style.display = "inline-block";
                 winMsgContainer.style.background = "linear-gradient(rgb(3, 206, 131) 0%,rgb(4, 158, 4) 150%)";
                 audioLookUp.childYayAudioEl.play();
@@ -327,10 +306,14 @@ function warTime() {
         warStatus = false;
         // reset warCards
         warCards = 0;
-        warMsgEl.style.display = "none";
         document.getElementById("warMusic").pause();
+        if (pHand[0].value > cHand[0].value) {
+            warMsgEl.innerHTML = "You've WON this battle!"
+        }
+        else if (cHand[0].value > pHand[0].value) {
+            warMsgEl.innerHTML = "You've LOST this battle!"
+        }
     }
-    warMsgEl.innerHTML = `Time for WAR! Play ${4 - warCards} more cards.`;
     render();
     getWinner();
 }
@@ -353,12 +336,9 @@ function shufflePDeck() {
         return card;
     });
     return pDeck;
-    
 }
 
-
 //////////////////////////////    Event Listeners    ////////////////////////////
-
 //Play button
 playBtnEl.addEventListener("click", function () {
     if (pNameInputEl.value) {
@@ -373,12 +353,14 @@ playBtnEl.addEventListener("click", function () {
         }, 350);
     }
 })
+
 // Home Rules button
 homeRulesBtnEl.addEventListener("click", function () {
     rulesMsgEl.style.display = "inline-block";
     homeSettingsBtnEl.style.pointerEvents = "none";
     playAgainBtnEl.style.pointerEvents = "none";
 })
+
 // Game Rules button
 gameRulesBtnEl.addEventListener("click", function () {
     rulesMsgEl.style.display = "inline-block";
@@ -395,6 +377,7 @@ rulesOKBtnEl.addEventListener("click", function () {
         btn.style.pointerEvents = "auto";
     })
 })
+
 // Play card button
 pCardBtnEl.addEventListener("click", function (e) {
     // play deal card sound
@@ -435,8 +418,6 @@ shuffleBtnEl.addEventListener("click", function () {
         },1200);
         console.log(shuffled);
     }
-  
-   
 });
 
 // Settings button
@@ -460,11 +441,10 @@ soundOnEl.addEventListener("click", function () {
     soundStatus = false;
     soundOnEl.style.display = "none";
     soundOffEl.style.display = "inline-block";
-
 })
 soundOffEl.addEventListener("click", function () {
     Object.values(audioLookUp).forEach(function (audio) {
-        audio.volume = 0.50;
+        audio.volume = 0.35;
     })
     soundStatus = true;
     soundOffEl.style.display = "none";
@@ -479,13 +459,12 @@ warMusicOnEl.addEventListener("click", function () {
 })
 warMusicOffEl.addEventListener("click", function () {
     if (soundStatus === true) {
-        audioLookUp.startWarEl.volume = 0.50;
-        audioLookUp.warMusicEl.volume = 0.50;
+        audioLookUp.startWarEl.volume = 0.35;
+        audioLookUp.warMusicEl.volume = 0.35;
     }
     warMusicOnEl.style.display = "inline-block";
     warMusicOffEl.style.display = "none";
 })
-
 // Settings ok button 
 settingsOkBtnEl.addEventListener("click", function () {
     settingsContainerEl.style.display = "none";
@@ -497,10 +476,9 @@ settingsOkBtnEl.addEventListener("click", function () {
 })
 
 //Play again button
-playAgainBtnEl.addEventListener("click", init)
+playAgainBtnEl.addEventListener("click", init);
 
 //////// Background themes ////////
-
 // Fiery Ocean (default)
 bgThemes["fieryOcean"]["bgFO1"].addEventListener("click", function () {
     // Remove existing theme
@@ -526,7 +504,6 @@ bgThemes["fieryOcean"]["bgFO1"].addEventListener("mouseleave", function () {
     bgThemes["fieryOcean"]["bgFO2"].style.display = "none";
 });
 
-
 // Black and yellow
 bgThemes["blackYellow"]["bgBY1"].addEventListener("click", function () {
     // Remove old theme
@@ -551,19 +528,3 @@ bgThemes["blackYellow"]["bgBY1"].addEventListener("mouseenter", function () {
 bgThemes["blackYellow"]["bgBY1"].addEventListener("mouseleave", function () {
     bgThemes["blackYellow"]["bgBY2"].style.display = "none";
 })
-
-
-// Computer trash talk
-// Speech bubble sometimes comes out 
-// if computer wins a round
-// When player down to 20/15/10/5/1 cards
-
-// Choose player icon vs computer icon
-// Icon profile pic for player & computer 
-
-
-
-
-
-
-

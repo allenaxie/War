@@ -38,3 +38,7 @@ War is a card game where two players compete to collect all 52 cards of the deck
 ---
 
 - Add player icons
+- Add random computer trash talk lines
+- Add chat box/system messages box
+- Add settings option: player can use number of rounds before winner is declared
+- Change background when WAR is declared
