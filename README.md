@@ -1,7 +1,7 @@
 
 # War
 
-![Game Image](images/gameImage.png)
+![Game Image](images/gameImage1.png)
 
 <br><br>
 
