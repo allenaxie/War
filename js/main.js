@@ -57,7 +57,7 @@ let pPileEl = document.querySelector(".pPile");
 let cPileEl = document.querySelector(".cPile");
 let pDeckEl = document.querySelector(".pDeck");
 let cDeckEl = document.querySelector(".cDeck");
-// Buttons
+// Buttons/Images
 let playBtnEl = document.querySelector(".playBtn");
 let pCardBtnEl = document.querySelector(".pCardBtn");
 let infoBtnEl = document.querySelector(".infoBtn");
@@ -74,6 +74,7 @@ let soundOnEl = document.querySelector(".soundOn");
 let soundOffEl = document.querySelector(".soundOff");
 let warMusicOnEl = document.querySelector(".warMusicOn");
 let warMusicOffEl = document.querySelector(".warMusicOff");
+let gameScreenTitleEl = document.querySelector(".gameScreenTitle");
 // Messages
 let roundEl = document.querySelector(".round");
 let warMsgEl = document.querySelector(".warMsg");
@@ -377,6 +378,11 @@ rulesOKBtnEl.addEventListener("click", function () {
         btn.style.pointerEvents = "auto";
     })
 })
+
+// Game screen title
+gameScreenTitleEl.addEventListener("click", function (){
+    location.reload();
+});
 
 // Play card button
 pCardBtnEl.addEventListener("click", function (e) {

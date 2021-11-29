@@ -52,6 +52,7 @@ header {
   display: flex;
   position: absolute;
   left: 20px;
+  cursor: pointer;
 }
 
 .gsWarTitle {
@@ -241,7 +242,7 @@ header {
   z-index: 2;
 }
 .settingsTitle {
-  color:gold;
+  color:rgb(0, 0, 0);
   font-size: 30px;
   text-decoration: underline;
   display: flex;
@@ -252,7 +253,7 @@ header {
 }
 .soundSettings {
   display: flex;
-  color: gold;
+  color: rgb(245, 245, 244);
   font-size: 20px;
 }
 .soundOn,.soundOff {
@@ -266,7 +267,7 @@ header {
 }
 .warMusicSettings {
   display: flex;
-  color: gold;
+  color: rgb(248, 248, 248);
   font-size: 20px;
   margin-top: 40px;
 }
@@ -342,11 +343,12 @@ footer {
 /* ------------ Color themes ------------ */
 .bgHeading {
   font-size: 20px;
+  font-weight: bold;
   text-decoration: underline;
   text-align: left;
   display: flex;
   margin-top: 50px;
-  color: gold;
+  color: rgb(0, 0, 0);
 }
 
 /* Fiery Ocean (default) */
@@ -365,7 +367,7 @@ footer {
 #bgFO1 {
   width: 100px;
   margin-left: 50px;
-  margin-top: 50px;
+  margin-top: 20px;
   cursor: pointer;
 }
 #bgFO2 {

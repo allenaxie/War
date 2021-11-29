@@ -1,7 +1,8 @@
 
 # War
 
-image of game
+![Game Image](images/gameImage.png)
+
 <br><br>
 
 ## Description
