@@ -141,7 +141,7 @@ function init() {
     shuffled = 0;
     soundStatus = true;
     Object.values(audioLookUp).forEach(function (audio) {
-        audio.volume = 0.35;
+        audio.volume = 0.2;
     })
     audioLookUp.startWarEl.volume = 0;
     audioLookUp.warMusicEl.volume = 0;
@@ -450,7 +450,7 @@ soundOnEl.addEventListener("click", function () {
 })
 soundOffEl.addEventListener("click", function () {
     Object.values(audioLookUp).forEach(function (audio) {
-        audio.volume = 0.35;
+        audio.volume = 0.2;
     })
     soundStatus = true;
     soundOffEl.style.display = "none";
@@ -465,8 +465,8 @@ warMusicOnEl.addEventListener("click", function () {
 })
 warMusicOffEl.addEventListener("click", function () {
     if (soundStatus === true) {
-        audioLookUp.startWarEl.volume = 0.35;
-        audioLookUp.warMusicEl.volume = 0.35;
+        audioLookUp.startWarEl.volume = 0.2;
+        audioLookUp.warMusicEl.volume = 0.2;
     }
     warMusicOnEl.style.display = "inline-block";
     warMusicOffEl.style.display = "none";

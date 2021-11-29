@@ -132,7 +132,11 @@ header {
   display: none;
 }
 
-.pHand,.cHand {
+.cHand {
+  opacity: 0;
+}
+
+.pHand {
   opacity: 0;
 }
 
@@ -182,6 +186,18 @@ header {
 
 .cDeckContainer,.pDeckContainer,.computerHP,.playerHP {
   display: flex;
+}
+
+.cDeckContainer {
+  height: 115px;
+}
+
+.pDeckContainer {
+  height: 115px;
+}
+
+.playerHP {
+  height: 120px;
 }
 
 .pDeck,.cDeck {
@@ -340,6 +356,26 @@ footer {
   font-family: Marcellus;
 }
 
+.computer {
+  display: flex;
+  justify-content: right;
+  margin-right: 20px;
+}
+.cIcon {
+  width: 50px;
+}
+
+.player {
+  display: flex;
+  justify-content: left;
+  margin-left: 10px;
+}
+.pIcon {
+  width: 50px;
+}
+
+
+
 /* ------------ Color themes ------------ */
 .bgHeading {
   font-size: 20px;
@@ -361,13 +397,13 @@ footer {
   color: black;
 }
 .bgFOContainer {
-  margin-top: 10px;
+  margin-top: 15px;
   text-align: left;
 }
 #bgFO1 {
   width: 100px;
   margin-left: 50px;
-  margin-top: 20px;
+  margin-top: 40px;
   cursor: pointer;
 }
 #bgFO2 {
