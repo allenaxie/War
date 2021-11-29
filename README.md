@@ -20,7 +20,7 @@ War is a card game where two players compete to collect all 52 cards of the deck
 
 ## Getting Started
 
-[Click here to play!](https://allenaxie.github.io/War/)
+<a href="https://allenaxie.github.io/War/" target="_blank">Click here to play!</a>
 
 - To start the game, enter your player name then click the 'Play' button.
 - Each round, both players play the next card from the the top of their deck onto the field. The player with the higher ranking card takes both cards into their deck. Winner is declared when a player collects all 52 cards. 
