@@ -140,11 +140,16 @@ function init() {
     player = {};
     shuffled = 0;
     soundStatus = true;
+    btnsEl.forEach(function (e) {
+        e.style.pointerEvents = "auto";
+    })
     Object.values(audioLookUp).forEach(function (audio) {
         audio.volume = 0.2;
     })
     audioLookUp.startWarEl.volume = 0;
     audioLookUp.warMusicEl.volume = 0;
+    warMusicOnEl.style.display = "none";
+    warMusicOffEl.style.display = "inline-block";
     render();
 };
 
@@ -399,7 +404,7 @@ pCardBtnEl.addEventListener("click", function (e) {
     pCardBtnEl.disabled = true;
     setTimeout(function () {
         pCardBtnEl.disabled = false;
-    }, 500);
+    }, 350);
 });
 // Click player deck to also play next card
 pDeckEl.addEventListener("click", function () {
