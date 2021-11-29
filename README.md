@@ -7,14 +7,11 @@
 
 ## Description
 
----
-
 War is a card game where two players compete to collect all 52 cards of the deck. Each player initially receives 26 cards and must play the next card on top of their deck each round. The player with the higher card takes both cards into their deck. 
 <br><br>
 
 ## Technologies Used
 
----
 - HTML
 - CSS
 - JavaScript
@@ -22,8 +19,6 @@ War is a card game where two players compete to collect all 52 cards of the deck
 <br><br>
 
 ## Getting Started
-
----
 
 [Click here to play!](https://allenaxie.github.io/War/)
 
@@ -35,8 +30,6 @@ War is a card game where two players compete to collect all 52 cards of the deck
 <br><br>
 
 ## Next Steps
-
----
 
 - Add player icons
 - Add random computer trash talk lines
