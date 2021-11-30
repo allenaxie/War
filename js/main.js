@@ -314,10 +314,10 @@ function warTime() {
         warCards = 0;
         document.getElementById("warMusic").pause();
         if (pHand[0].value > cHand[0].value) {
-            warMsgEl.innerHTML = "You've WON this battle!"
+            warMsgEl.innerHTML = "You WON the battle!"
         }
         else if (cHand[0].value > pHand[0].value) {
-            warMsgEl.innerHTML = "You've LOST this battle!"
+            warMsgEl.innerHTML = "You LOST the battle!"
         }
     }
     render();

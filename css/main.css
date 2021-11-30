@@ -7,6 +7,7 @@ body {
   width: 100%;
   background: linear-gradient(#065e79,#e25b17);
   color: white;
+  overflow: hidden;
 }
 
 header {
