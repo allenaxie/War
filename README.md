@@ -14,6 +14,7 @@ War is a card game where two players compete to collect all 52 cards of the deck
 
 - HTML
 - CSS
+- CSS Cardstarter Library
 - JavaScript
 - jQuery
 <br><br>
