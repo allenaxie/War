@@ -1,8 +1,7 @@
 
 # War
 
-![Game Image](images/gameImage1.png)
-
+<img src="images/gameImage1.png" width=350px overflow="hidden"> <img src="images/gameImage2.png" width=350px overflow="hidden">
 <br><br>
 
 ## Description
